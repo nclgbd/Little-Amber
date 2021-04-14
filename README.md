@@ -4,6 +4,7 @@ This is Little Amber, a bot I created to help manage the links in Amber's server
 ## List of available commands:
 * `!help` - gives a list of commands available and how to use them
 * `!uptime` - returns how long the bot has been online for. Great for debugging
+* `!wacky` - Wacky Debators HATE her!!! Debatebros in DGG want from 3 to 27 WINS with this ONE WEIRD EMOTE. >>>CLICK HERE<<< TO LEARN MORE
 
 ## Usage
 If (~~for some inexplicable reason~~) you'd like fork this bot and use it for yourself, great! Just know...
