@@ -64,7 +64,8 @@ async def on_message(message):
         if len(links) > 0:
             channel = CLIENT.get_channel(link_id)
             await channel.send(message.content + " from: " + str(message.author.display_name))
-            await CLIENT.process_commands(message)
+    
+    await CLIENT.process_commands(message)
             
         # print(links)
         # if message.attachments.content_type:
