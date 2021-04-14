@@ -26,6 +26,7 @@ CHANNEL_LIBRARY = [826749300993425419,
                    830770149657280532,
                    831716059555692584]
 
+
 CHANNEL_LINKS = [830772056702058547,
                  830772486903300116,
                  830772094031626268,
@@ -54,38 +55,38 @@ CLIENT = commands.Bot(command_prefix = PREFIX)
 START_TIME = datetime.datetime.utcnow()
 
 
+
+
 @CLIENT.event
 async def on_message(message):
     if message.channel.id in CHANNEL_LIBRARY:
         link_id = CHANNEL_MAPPING[message.channel.id]
         links = re.findall(LINK_REGEX, message.content) 
         
-        # if the message contains a link
-        if len(links) > 0:
+        if len(links) > 0 or len(message.attachments) > 0:
             channel = CLIENT.get_channel(link_id)
-            await channel.send(message.content + " from: " + str(message.author.display_name))
+            if len(message.attachments) > 0:
+                await channel.send(message.attachments[0].url + " from: " + str(message.author.display_name))
+                
+            else:
+                await channel.send(message.content + " from: " + str(message.author.display_name))
     
     await CLIENT.process_commands(message)
-            
-        # print(links)
-        # if message.attachments.content_type:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@CLIENT.command(name='info',
+                aliases=['botinfo', 'bot_info'])
+async def info(ctx):
+    '''
+    Returns the code for the bot.
+    '''
+    embed = discord.Embed(title="Little Amber", color=0xff0000, 
+                          description="The source code for Little Amber. Press !help for a list of available commands.")
+    embed.set_thumbnail(url="https://media.discordapp.net/attachments/831716059555692584/831963479153967115/831420535941890079.png")
+    embed.add_field(name='GitHub', value='https://github.com/nguobadia/Little-Amber', inline=False)
+    
+    await ctx.send(embed=embed)
 
 
 
@@ -95,6 +96,7 @@ async def on_ready():
     print(CLIENT.user.name)
     print('------')
     await CLIENT.change_presence(activity=discord.Game(name='Studying...', type=1))
+
 
 
 @CLIENT.command(name='uptime',
