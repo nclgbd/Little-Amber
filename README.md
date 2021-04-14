@@ -9,12 +9,12 @@ This is Little Amber, a bot I created to help manage the links in Amber's server
 If (~~for some inexplicable reason~~) you'd like fork this bot and use it for yourself, great! Just know...
 * You'll have to make a folder name `config` and inside that folder create a json file named `config.json`.
 * In there, it should look something like this:
-```json
+```javascript
 {
     "token": "<token-string>",
     "prefix": "<preferred prefix>",
-    "client_id": <integer representation of the bot's id>,
-    "me": <integer representation of the programmer's id>
+    "client_id": <bot id>,
+    "me": <programmer's id>
 }
 ```
 
