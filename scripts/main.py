@@ -77,6 +77,13 @@ async def on_message(message):
     await CLIENT.process_commands(message)
 
 
+@CLIENT.command(name='wacky',
+                aliases=['wackydebators', 'wacky_debators'],
+                description="Wacky Debators HATE her!!! Debatebros in DGG want from 3 to 27 WINS with this ONE WEIRD EMOTE. >>>CLICK HERE<<< TO LEARN MORE")
+async def wacky_debators(ctx):
+    wacky_url = "https://media.discordapp.net/attachments/275435872424296449/831368229246074900/wacky-debaters-HATE-her-gif.gif"
+    await ctx.send(wacky_url)
+
 
 @CLIENT.command(name='info',
                 aliases=['botinfo', 'bot_info'])
