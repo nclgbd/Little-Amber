@@ -8,6 +8,7 @@ import re
 from discord.ext import commands
 from discord.ext.commands import Bot
 
+
 CHANNEL_NAMES = ["philosophy", "religion", "psychology", "sociology", "economics", "us-politics",
                  "global-politics", "history", "science", "lgbt", "rhetoric", "art-analysis", "miscellaneous", "bot-testing"]
 
@@ -52,6 +53,8 @@ with open("config/config.json", "r") as j:
 PREFIX = bot_info["prefix"]
 TOKEN = bot_info["token"]
 CLIENT = commands.Bot(command_prefix = PREFIX)
+CLIENT_ID = bot_info["client_id"]
+ME = bot_info["me"]
 START_TIME = datetime.datetime.utcnow()
 
 
@@ -81,10 +84,16 @@ async def info(ctx):
     '''
     Returns the code for the bot.
     '''
-    embed = discord.Embed(title="Little Amber", color=0xff0000, 
+    me = await CLIENT.fetch_user(ME)
+    embed = discord.Embed(title="Little Amber", color=0xff0000,
                           description="The source code for Little Amber. Press !help for a list of available commands.")
+    
+    embed.set_author(name="Creator: " + me.display_name)
+    embed.set_footer(text="You have permission to ping me with any questions and/or suggestions for the bot :)")
     embed.set_thumbnail(url="https://media.discordapp.net/attachments/831716059555692584/831963479153967115/831420535941890079.png")
-    embed.add_field(name='GitHub', value='https://github.com/nguobadia/Little-Amber', inline=False)
+    
+    embed.add_field(name='GitHub', value='https://github.com/nguobadia/Little-Amber', inline=True)
+    embed.add_field(name='README.md', value="https://github.com/nguobadia/Little-Amber/blob/master/README.md", inline=True)
     
     await ctx.send(embed=embed)
 
@@ -120,5 +129,7 @@ async def uptime(ctx):
         
     uptime_stamp = time_format.format(d=days, h=hours, m=minutes, s=seconds)
     await ctx.send('{} has been up for {}'.format(CLIENT.user.name, uptime_stamp))
+
+
     
 CLIENT.run(TOKEN)
