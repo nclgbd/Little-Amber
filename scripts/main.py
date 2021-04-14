@@ -62,7 +62,7 @@ START_TIME = datetime.datetime.utcnow()
 
 @CLIENT.event
 async def on_message(message):
-    if message.channel.id in CHANNEL_LIBRARY:
+    if message.channel.id in CHANNEL_LIBRARY and message.author.id != CLIENT_ID:
         link_id = CHANNEL_MAPPING[message.channel.id]
         links = re.findall(LINK_REGEX, message.content) 
         
