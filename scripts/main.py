@@ -88,9 +88,25 @@ async def wacky_debators(ctx):
 
 @CLIENT.command(name='epiphany',
                 aliases=['epi'])
-async def wacky_debators(ctx):
+async def epiphany(ctx):
     epi_url = "https://media.discordapp.net/attachments/826739157309063179/832372910391820299/unknown.png?width=1440&height=169"
     await ctx.send(epi_url)
+
+    
+    
+@CLIENT.command(name='readme',
+                description="Gives the link to the README.md")
+async def read_me(ctx):
+    url = "https://github.com/nguobadia/Little-Amber/blob/master/README.md"
+    await ctx.send(url)
+    
+    
+    
+@CLIENT.command(name='amber')
+async def amber(ctx):
+    amber_url = "https://cdn.discordapp.com/attachments/826911867166916668/831843942538018836/unknown.png"
+    await ctx.send(amber_url)
+
 
 
 @CLIENT.command(name='info',
@@ -111,13 +127,15 @@ async def info(ctx):
     embed.add_field(name='README.md', value="https://github.com/nguobadia/Little-Amber/blob/master/README.md", inline=True)
     
     await ctx.send(embed=embed)
-    
-    
-@CLIENT.command(name='readme',
-                description="Gives the link to the README.md")
-async def info(ctx):
-    url = "https://github.com/nguobadia/Little-Amber/blob/master/README.md"
-    await ctx.send(url)
+
+
+
+
+
+
+
+
+
 
 
 @CLIENT.event
@@ -126,7 +144,6 @@ async def on_ready():
     print(CLIENT.user.name)
     print('------')
     await CLIENT.change_presence(activity=discord.Game(name='Studying...', type=1))
-
 
 
 @CLIENT.command(name='uptime',
