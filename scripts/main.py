@@ -97,7 +97,7 @@ async def epiphany(ctx):
 @CLIENT.command(name='readme',
                 description="Gives the link to the README.md")
 async def read_me(ctx):
-    url = "https://github.com/nguobadia/Little-Amber/blob/master/README.md"
+    url = "https://github.com/nclgbd/Little-Amber/blob/master/README.md"
     await ctx.send(url)
     
     
@@ -123,8 +123,8 @@ async def info(ctx):
     embed.set_footer(text="You have permission to ping me with any questions and/or suggestions for the bot :)")
     embed.set_thumbnail(url="https://media.discordapp.net/attachments/831716059555692584/831963479153967115/831420535941890079.png")
     
-    embed.add_field(name='GitHub', value='https://github.com/nguobadia/Little-Amber', inline=True)
-    embed.add_field(name='README.md', value="https://github.com/nguobadia/Little-Amber/blob/master/README.md", inline=True)
+    embed.add_field(name='GitHub', value='https://github.com/nclgbd/Little-Amber', inline=True)
+    embed.add_field(name='README.md', value="https://github.com/nclgbd/Little-Amber/blob/master/README.md", inline=True)
     
     await ctx.send(embed=embed)
 
