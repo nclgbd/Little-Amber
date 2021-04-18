@@ -81,7 +81,7 @@ async def on_message(message):
                 aliases=['wackydebators', 'wacky_debators'],
                 description="Wacky Debators HATE her!!! Debatebros in DGG want from 3 to 27 WINS with this ONE WEIRD EMOTE. >>>CLICK HERE<<< TO LEARN MORE")
 async def wacky_debators(ctx):
-    wacky_url = "https://media.discordapp.net/attachments/275435872424296449/831368229246074900/wacky-debaters-HATE-her-gif.gif"
+    wacky_url = "https://cdn.discordapp.com/attachments/826739157309063179/833257773500203028/wacky-debaters-HATE-her-gif-2.gif"
     await ctx.send(wacky_url)
     
 
