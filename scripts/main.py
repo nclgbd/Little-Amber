@@ -107,6 +107,11 @@ async def amber(ctx):
     amber_url = "https://cdn.discordapp.com/attachments/826911867166916668/831843942538018836/unknown.png"
     await ctx.send(amber_url)
 
+@CLIENT.command(name='bully',
+                aliases=["bullied"])
+async def bully(ctx):
+    bully_url = "https://media.discordapp.net/attachments/275435872424296449/830192706030010448/unknown.png"
+    await ctx.send(bully_url)
 
 
 @CLIENT.command(name='info',
