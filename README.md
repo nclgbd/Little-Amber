@@ -5,7 +5,8 @@ This is Little Amber, a bot I created to help manage the links in Amber's server
 * `!help` - gives a list of commands available and how to use them
 * `!uptime` - returns how long the bot has been online for. Great for debugging
 * `!wacky` - Wacky Debators HATE her!!! Debatebros in DGG want from 3 to 27 WINS with this ONE WEIRD EMOTE. >>>CLICK HERE<<< TO LEARN MORE
-* `!epiphany` - Provides prrof that Epiphany is toxic!!!
+* `!epiphany` - Provides proof that Epiphany is toxic!!!
+* `irk` - Irk being racist
 * `!readme` - Provides a link to the README.md, aka this page
 
 ## Usage
