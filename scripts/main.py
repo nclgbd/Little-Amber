@@ -134,6 +134,10 @@ async def info(ctx):
     await ctx.send(embed=embed)
 
 
+@CLIENT.command(name='irk')
+async def irk(ctx):
+    irk_url = "https://media.discordapp.net/attachments/827669718563029012/842144430358003722/unknown.png"
+    await ctx.send(irk_url)
 
 
 @CLIENT.event
