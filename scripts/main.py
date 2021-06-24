@@ -1,12 +1,15 @@
 #!/usr/bin/python
 
+import time
+import sched
 import discord
-import datetime
 import json
 import re
 
 from discord.ext import commands
 from discord.ext.commands import Bot
+from datetime import datetime, timedelta
+
 
 
 CHANNEL_NAMES = ["philosophy", "religion", "psychology", "sociology", "economics", "us-politics",
@@ -55,7 +58,10 @@ TOKEN = bot_info["token"]
 CLIENT = commands.Bot(command_prefix = PREFIX)
 CLIENT_ID = bot_info["client_id"]
 ME = bot_info["me"]
-START_TIME = datetime.datetime.utcnow()
+ALARM_TIME = '23:29'#24hrs
+
+START_TIME = datetime.utcnow()
+print(START_TIME)
 
 
 
@@ -102,10 +108,10 @@ async def read_me(ctx):
     
     
     
-@CLIENT.command(name='amber')
-async def amber(ctx):
-    amber_url = "https://cdn.discordapp.com/attachments/826911867166916668/831843942538018836/unknown.png"
-    await ctx.send(amber_url)
+# @CLIENT.command(name='amber')
+# async def amber(ctx):
+#     amber_url = "https://cdn.discordapp.com/attachments/826911867166916668/831843942538018836/unknown.png"
+#     await ctx.send(amber_url)
 
 @CLIENT.command(name='bully',
                 aliases=["bullied"])
@@ -148,13 +154,35 @@ async def on_ready():
     await CLIENT.change_presence(activity=discord.Game(name='Studying...', type=1))
 
 
+
+@CLIENT.command(name='bible',
+                aliases=['bible_study'])
+async def bible_study(ctx):
+    url = "https://media.discordapp.net/attachments/831987127306289233/853751236766203914/unknown.png"
+    await ctx.send(url)
+
+
+@CLIENT.command(name='amber')
+async def amber(ctx):
+    url = "https://media.discordapp.net/attachments/831987127306289233/857088359469547551/image0.png"
+    await ctx.send(url)
+
+
+
+@CLIENT.command(name='bonk')
+async def bonk(ctx):
+    url = "https://media.discordapp.net/attachments/826911867166916668/855848987063746620/image0.png?width=583&height=702"
+    await ctx.send(url)
+
+
+
 @CLIENT.command(name='uptime',
                 description='Returns how long the bot has been running for.')
 async def uptime(ctx):
     '''
     Source: https://stackoverflow.com/questions/52155265/my-uptime-function-isnt-able-to-go-beyond-24-hours-on-heroku
     '''
-    now = datetime.datetime.utcnow() # Timestamp of when uptime function is run
+    now = datetime.utcnow() # Timestamp of when uptime function is run
     delta = now - START_TIME
     
     hours, remainder = divmod(int(delta.total_seconds()), 3600)
@@ -170,6 +198,29 @@ async def uptime(ctx):
     uptime_stamp = time_format.format(d=days, h=hours, m=minutes, s=seconds)
     await ctx.send('{} has been up for {}'.format(CLIENT.user.name, uptime_stamp))
 
+
+
+async def time_check():
+    await CLIENT.wait_until_ready()
+    while not CLIENT.is_closed:
+        channel = CLIENT.get_channel(CHANNEL_MAPPING["bot-testing"])
+        messages = ('Test')
+        f = '%H:%M'
+
+        now = datetime.strftime(datetime.now(), f)
+        # get the difference between the alarm time and now
+        diff = (datetime.strptime(ALARM_TIME, f) - datetime.strptime(now, f)).total_seconds()
+
+        # create a scheduler
+        s = sched.scheduler(time.perf_counter, time.sleep)
+        # arguments being passed to the function being called in s.enter
+        args = (CLIENT.send_message(channel, message), )
+        # enter the command and arguments into the scheduler
+        s.enter(seconds, 1, CLIENT.loop.create_task, args)
+        s.run() # run the scheduler, will block the event loop
+
+
+CLIENT.loop.create_task(time_check())
 
     
 CLIENT.run(TOKEN)
