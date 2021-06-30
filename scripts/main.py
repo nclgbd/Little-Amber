@@ -200,6 +200,26 @@ async def uptime(ctx):
 
 
 
+@CLIENT.command(name='hugh')
+async def hugh(ctx):
+    url = "https://media.discordapp.net/attachments/838595679994511400/859620398864924672/unknown.png"
+    await ctx.send(url)
+
+
+@CLIENT.command(name='nico',
+                aliases=["niconico", "niconiconii"])
+async def nico(ctx):
+    url = "https://media.discordapp.net/attachments/838595679994511400/859654492877881354/unknown.png"
+    await ctx.send(url)
+
+
+@CLIENT.command(name='triangle',
+                aliases=["hannah"])
+async def triangle(ctx):
+    url = "https://media.discordapp.net/attachments/826743475143311390/859585542022889472/unknown.png?width=753&height=701"
+    await ctx.send(url)
+
+
 async def time_check():
     await CLIENT.wait_until_ready()
     while not CLIENT.is_closed:
