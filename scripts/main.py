@@ -218,6 +218,12 @@ async def nico(ctx):
 async def triangle(ctx):
     url = "https://media.discordapp.net/attachments/826743475143311390/859585542022889472/unknown.png?width=753&height=701"
     await ctx.send(url)
+    
+    
+@CLIENT.command(name='jebaited')
+async def jebaited(ctx):
+    url = "https://media.discordapp.net/attachments/826739157309063179/859930982186352710/irk_jebaited.png?width=1440&height=156"
+    await ctx.send(url)
 
 
 async def time_check():
