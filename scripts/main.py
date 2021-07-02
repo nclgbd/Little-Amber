@@ -224,6 +224,12 @@ async def triangle(ctx):
 async def jebaited(ctx):
     url = "https://media.discordapp.net/attachments/826739157309063179/859930982186352710/irk_jebaited.png?width=1440&height=156"
     await ctx.send(url)
+    
+
+@CLIENT.command(name='retard')
+async def retard(ctx):
+    url = "https://media.discordapp.net/attachments/826743475143311390/860323098065502278/ad919b803f20f7eb29d1909b77839653.png"
+    await ctx.send(url)
 
 
 # async def time_check():
