@@ -216,7 +216,7 @@ async def nico(ctx):
 @CLIENT.command(name='triangle',
                 aliases=["hannah"])
 async def triangle(ctx):
-    url = "https://media.discordapp.net/attachments/826743475143311390/859585542022889472/unknown.png?width=753&height=701"
+    url = "https://media.discordapp.net/attachments/826743475143311390/860315076870668299/hannah_moment_refined.png?width=701&height=701"
     await ctx.send(url)
     
     
@@ -226,27 +226,27 @@ async def jebaited(ctx):
     await ctx.send(url)
 
 
-async def time_check():
-    await CLIENT.wait_until_ready()
-    while not CLIENT.is_closed:
-        channel = CLIENT.get_channel(CHANNEL_MAPPING["bot-testing"])
-        messages = ('Test')
-        f = '%H:%M'
+# async def time_check():
+#     await CLIENT.wait_until_ready()
+#     while not CLIENT.is_closed:
+#         channel = CLIENT.get_channel(CHANNEL_MAPPING["bot-testing"])
+#         messages = ('Test')
+#         f = '%H:%M'
 
-        now = datetime.strftime(datetime.now(), f)
-        # get the difference between the alarm time and now
-        diff = (datetime.strptime(ALARM_TIME, f) - datetime.strptime(now, f)).total_seconds()
+#         now = datetime.strftime(datetime.now(), f)
+#         # get the difference between the alarm time and now
+#         diff = (datetime.strptime(ALARM_TIME, f) - datetime.strptime(now, f)).total_seconds()
 
-        # create a scheduler
-        s = sched.scheduler(time.perf_counter, time.sleep)
-        # arguments being passed to the function being called in s.enter
-        args = (CLIENT.send_message(channel, message), )
-        # enter the command and arguments into the scheduler
-        s.enter(seconds, 1, CLIENT.loop.create_task, args)
-        s.run() # run the scheduler, will block the event loop
+#         # create a scheduler
+#         s = sched.scheduler(time.perf_counter, time.sleep)
+#         # arguments being passed to the function being called in s.enter
+#         args = (CLIENT.send_message(channel, message), )
+#         # enter the command and arguments into the scheduler
+#         s.enter(seconds, 1, CLIENT.loop.create_task, args)
+#         s.run() # run the scheduler, will block the event loop
 
 
-CLIENT.loop.create_task(time_check())
+# CLIENT.loop.create_task(time_check())
 
     
 CLIENT.run(TOKEN)
