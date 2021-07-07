@@ -238,7 +238,7 @@ async def jebaited(ctx):
 @CLIENT.command(name='retard')
 async def retard(ctx):
     """Retard."""
-    url = "https://media.discordapp.net/attachments/826743475143311390/860323098065502278/ad919b803f20f7eb29d1909b77839653.png"
+    url = "https://media.discordapp.net/attachments/517957631592366110/862261065294413844/unknown.png"
     await ctx.send(url)
     
     
