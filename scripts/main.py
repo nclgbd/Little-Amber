@@ -64,8 +64,6 @@ START_TIME = datetime.utcnow()
 print(START_TIME)
 
 
-
-
 @CLIENT.event
 async def on_message(message):
     if message.channel.id in CHANNEL_LIBRARY and message.author.id != CLIENT_ID:
@@ -87,6 +85,7 @@ async def on_message(message):
                 aliases=['wackydebators', 'wacky_debators'],
                 description="Wacky Debators HATE her!!! Debatebros in DGG want from 3 to 27 WINS with this ONE WEIRD EMOTE. >>>CLICK HERE<<< TO LEARN MORE")
 async def wacky_debators(ctx):
+    """Wacky Debators HATE her!!! Debatebros in DGG want from 3 to 27 WINS with this ONE WEIRD EMOTE. >>>CLICK HERE<<< TO LEARN MORE"""
     wacky_url = "https://cdn.discordapp.com/attachments/826739157309063179/833257773500203028/wacky-debaters-HATE-her-gif-2.gif"
     await ctx.send(wacky_url)
     
@@ -95,6 +94,8 @@ async def wacky_debators(ctx):
 @CLIENT.command(name='epiphany',
                 aliases=['epi'])
 async def epiphany(ctx):
+    """amber suck my dick fuck you oh my god i fucking hate you why did we replace bullet with someone even more arrogant and 
+    bratty and how the fuck is it even possible that such a person can exist jesus fucking christ"""
     epi_url = "https://media.discordapp.net/attachments/826739157309063179/832372910391820299/unknown.png?width=1440&height=169"
     await ctx.send(epi_url)
 
@@ -103,21 +104,21 @@ async def epiphany(ctx):
 @CLIENT.command(name='readme',
                 description="Gives the link to the README.md")
 async def read_me(ctx):
+    """If the stemlords that actually care about the code, this is your command. Or !info"""
     url = "https://github.com/nclgbd/Little-Amber/blob/master/README.md"
     await ctx.send(url)
     
-    
-    
-# @CLIENT.command(name='amber')
-# async def amber(ctx):
-#     amber_url = "https://cdn.discordapp.com/attachments/826911867166916668/831843942538018836/unknown.png"
-#     await ctx.send(amber_url)
+
 
 @CLIENT.command(name='bully',
                 aliases=["bullied"])
 async def bully(ctx):
+    """Gonna cry? Gonna piss your pants? Maybe? Maybe shit and cum?… Well then you fucking normie, maybe you should click on
+    my username and on my profile you should see three dots to the right of my username. Click those three dots to open a dropdown
+    menu reads "Block". Click that option and confirm that you want to block me to avoid seeing my future posts"""
     bully_url = "https://media.discordapp.net/attachments/275435872424296449/830192706030010448/unknown.png"
     await ctx.send(bully_url)
+
 
 
 @CLIENT.command(name='info',
@@ -142,6 +143,7 @@ async def info(ctx):
 
 @CLIENT.command(name='irk')
 async def irk(ctx):
+    """Black Italian."""
     irk_url = "https://media.discordapp.net/attachments/827669718563029012/842144430358003722/unknown.png"
     await ctx.send(irk_url)
 
@@ -158,12 +160,14 @@ async def on_ready():
 @CLIENT.command(name='bible',
                 aliases=['bible_study'])
 async def bible_study(ctx):
+    """:ReadTheBible:"""
     url = "https://media.discordapp.net/attachments/831987127306289233/853751236766203914/unknown.png"
     await ctx.send(url)
 
 
 @CLIENT.command(name='amber')
 async def amber(ctx):
+    """FEED ME MY OPINIONS"""
     url = "https://media.discordapp.net/attachments/831987127306289233/857088359469547551/image0.png"
     await ctx.send(url)
 
@@ -171,6 +175,7 @@ async def amber(ctx):
 
 @CLIENT.command(name='bonk')
 async def bonk(ctx):
+    """*Bonk!* Use it to tell someone to knock it off!"""
     url = "https://media.discordapp.net/attachments/826911867166916668/855848987063746620/image0.png?width=583&height=702"
     await ctx.send(url)
 
@@ -202,6 +207,7 @@ async def uptime(ctx):
 
 @CLIENT.command(name='hugh')
 async def hugh(ctx):
+    """HWNBABM"""
     url = "https://media.discordapp.net/attachments/838595679994511400/859620398864924672/unknown.png"
     await ctx.send(url)
 
@@ -209,6 +215,7 @@ async def hugh(ctx):
 @CLIENT.command(name='nico',
                 aliases=["niconico", "niconiconii"])
 async def nico(ctx):
+    """https://youtu.be/-_lb--PWEMU?t=26"""
     url = "https://media.discordapp.net/attachments/838595679994511400/859654492877881354/unknown.png"
     await ctx.send(url)
 
@@ -216,20 +223,37 @@ async def nico(ctx):
 @CLIENT.command(name='triangle',
                 aliases=["hannah"])
 async def triangle(ctx):
+    """The infamous triangle, used to analyze trans issues, also funny meme."""
     url = "https://media.discordapp.net/attachments/826743475143311390/860315076870668299/hannah_moment_refined.png?width=701&height=701"
     await ctx.send(url)
     
     
 @CLIENT.command(name='jebaited')
 async def jebaited(ctx):
+    """Jebaited.... :^)"""
     url = "https://media.discordapp.net/attachments/826739157309063179/859930982186352710/irk_jebaited.png?width=1440&height=156"
     await ctx.send(url)
     
 
 @CLIENT.command(name='retard')
 async def retard(ctx):
+    """Retard."""
     url = "https://media.discordapp.net/attachments/826743475143311390/860323098065502278/ad919b803f20f7eb29d1909b77839653.png"
     await ctx.send(url)
+    
+    
+@CLIENT.command(name='nicole')
+async def nicole(ctx):
+    """
+    https://www.youtube.com/watch?v=87K5Uh3AML0, but with me instead :AmberHappy:
+
+    Parameters
+    ----------
+    ctx : [type]
+        [description]
+    """    
+    f = r"media/nicole_nippon.mp3"
+    await ctx.send(file=discord.File(f))
 
 
 # async def time_check():
