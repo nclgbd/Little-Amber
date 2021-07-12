@@ -234,13 +234,6 @@ async def jebaited(ctx):
     url = "https://media.discordapp.net/attachments/826739157309063179/859930982186352710/irk_jebaited.png?width=1440&height=156"
     await ctx.send(url)
     
-
-@CLIENT.command(name='retard')
-async def retard(ctx):
-    """Retard."""
-    url = "https://media.discordapp.net/attachments/517957631592366110/862261065294413844/unknown.png"
-    await ctx.send(url)
-    
     
 @CLIENT.command(name='nicole')
 async def nicole(ctx):
