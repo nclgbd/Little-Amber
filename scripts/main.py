@@ -239,15 +239,19 @@ async def jebaited(ctx):
 async def nicole(ctx):
     """
     https://www.youtube.com/watch?v=87K5Uh3AML0, but with me instead :AmberHappy:
-
-    Parameters
-    ----------
-    ctx : [type]
-        [description]
     """    
     f = r"media/nicole_nippon.mp3"
     await ctx.send(file=discord.File(f))
+    
 
+@CLIENT.command(name='bullet')
+async def bullet(ctx):
+    """
+    bullet == amber
+    """    
+    string = "**Bullet = Amber**:\n\t*\"I want you to call me whatever is most natural to you between male and female, Bullet and Amber. If you have no preference Bullet and male works for simplicity's sake.\"*"
+
+    await ctx.send(string)
 
 # async def time_check():
 #     await CLIENT.wait_until_ready()
