@@ -5,6 +5,7 @@ import sched
 import discord
 import json
 import re
+import os
 
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -245,6 +246,45 @@ async def nicole(ctx):
     await ctx.send(file=discord.File(f))
     
 
+
+
+
+### B O O K    C L U B     C O M M A N D S ###
+@CLIENT.command(name='schedule')
+async def schedule(ctx):
+    pass
+
+@CLIENT.command(name='bookclub')
+async def bookclub(ctx):
+    pass
+
+@CLIENT.command(name='reading')
+async def reading(ctx):
+    current_reading = []
+    
+    filenames = _get_book_names()
+    msg = "Our current readings are:\n"
+    n = ""
+    files = []
+    for names in filenames:
+        n += "`{}`\n".format(names)
+        files.append(discord.File("media/book_club/"+"{}".format(names)))
+        
+    await ctx.send(msg+n)
+    
+    for f in files:
+        await ctx.send(file=f)
+
+
+def _get_book_names():
+    path = "media/book_club"
+    
+    files = []
+    for root, dirs, fls in os.walk(path):
+        for name in fls:
+            files.append(name)
+            
+    return files
 
 # async def time_check():
 #     await CLIENT.wait_until_ready()
