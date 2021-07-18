@@ -165,10 +165,11 @@ async def bible_study(ctx):
     await ctx.send(url)
 
 
-@CLIENT.command(name='amber')
+@CLIENT.command(name='amber',
+                aliases=['bullet'])
 async def amber(ctx):
-    """FEED ME MY OPINIONS"""
-    url = "https://media.discordapp.net/attachments/831987127306289233/857088359469547551/image0.png"
+    """We miss you <3"""
+    url = "https://media.discordapp.net/attachments/829429908848902164/866413383375650846/unknown.png"
     await ctx.send(url)
 
 
@@ -244,14 +245,6 @@ async def nicole(ctx):
     await ctx.send(file=discord.File(f))
     
 
-@CLIENT.command(name='bullet')
-async def bullet(ctx):
-    """
-    bullet == amber
-    """    
-    string = "**Bullet = Amber**:\n\t*\"I want you to call me whatever is most natural to you between male and female, Bullet and Amber. If you have no preference Bullet and male works for simplicity's sake.\"*"
-
-    await ctx.send(string)
 
 # async def time_check():
 #     await CLIENT.wait_until_ready()
