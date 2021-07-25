@@ -1,5 +1,5 @@
 on:
-  pull-request:
+  pull_request:
     branches:
       - master
 
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: AWS SSM Send-Command Temp
+    - name: Pull Changes and Relaunch Little Amber
       # You may pin to the exact commit or the version.
       # uses: LGB-PUB/aws-ssm-send-command@593e574a8ec5c79515c8e6146449f507bfeafb9e
       uses: LGB-PUB/aws-ssm-send-command@1.0.2

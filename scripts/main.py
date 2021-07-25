@@ -64,6 +64,71 @@ ALARM_TIME = '23:29'#24hrs
 START_TIME = datetime.utcnow()
 print(START_TIME)
 
+class BookClub:
+    
+    def __init__(self, file_path):
+        
+        self.icon_url = "https://media.discordapp.net/attachments/827394666383147048/866946006330114058/ash_pfp_0.png"
+        self.file_path = file_path
+        with open(self.file_path, "r") as f:
+            self.books = dict(json.load(f))
+            
+        self.current_readings = self.get_current_readings()
+        
+    
+    
+    def update_library(self):
+        
+        with open(self.file_path, "w") as f:
+            json.dump(self.books, f)
+       
+       
+
+    def get_current_readings(self):
+
+        current_readings = dict()
+        for book in self.books:
+            if self.books[book]["current_reading"]:
+                current_readings[book] = self.books[book]["url"]
+                
+        return current_readings  
+    
+    
+    
+    def upload_book(self, attachment, is_current_reading=True):
+        
+        filename = attachment.filename[:-4]
+        url = attachment.url
+        self.books[filename] = {"url" : url,
+                                "current_reading": is_current_reading}
+        
+        self.update_library()
+      
+        
+        
+    def set_current_reading(self, book_name, is_current_reading=True):
+        self.books[book_name]["current_reading"] = is_current_reading
+        self.update_library()
+        
+    
+    
+    def remove_book(self, book_name):
+        del self.books[book_name]
+        self.update_library()
+
+
+book_club = BookClub("media/book_club/books.json")
+
+@CLIENT.event
+async def on_ready():
+    print('Logged in as')
+    print(CLIENT.user.name)
+    print('------')
+    
+    
+    await CLIENT.change_presence(activity=discord.Game(name='Studying...', type=1))
+    
+    
 
 @CLIENT.event
 async def on_message(message):
@@ -80,6 +145,7 @@ async def on_message(message):
                 await channel.send(message.content + " from: " + str(message.author.display_name))
     
     await CLIENT.process_commands(message)
+
 
 
 @CLIENT.command(name='wacky',
@@ -142,19 +208,12 @@ async def info(ctx):
     await ctx.send(embed=embed)
 
 
+
 @CLIENT.command(name='irk')
 async def irk(ctx):
     """Black Italian."""
     irk_url = "https://media.discordapp.net/attachments/827669718563029012/842144430358003722/unknown.png"
     await ctx.send(irk_url)
-
-
-@CLIENT.event
-async def on_ready():
-    print('Logged in as')
-    print(CLIENT.user.name)
-    print('------')
-    await CLIENT.change_presence(activity=discord.Game(name='Studying...', type=1))
 
 
 
@@ -164,6 +223,7 @@ async def bible_study(ctx):
     """:ReadTheBible:"""
     url = "https://media.discordapp.net/attachments/831987127306289233/853751236766203914/unknown.png"
     await ctx.send(url)
+
 
 
 @CLIENT.command(name='amber',
@@ -214,6 +274,7 @@ async def hugh(ctx):
     await ctx.send(url)
 
 
+
 @CLIENT.command(name='nico',
                 aliases=["niconico", "niconiconii"])
 async def nico(ctx):
@@ -222,12 +283,14 @@ async def nico(ctx):
     await ctx.send(url)
 
 
+
 @CLIENT.command(name='triangle',
                 aliases=["hannah"])
 async def triangle(ctx):
     """The infamous triangle, used to analyze trans issues, also funny meme."""
     url = "https://media.discordapp.net/attachments/826743475143311390/860315076870668299/hannah_moment_refined.png?width=701&height=701"
     await ctx.send(url)
+   
     
     
 @CLIENT.command(name='jebaited')
@@ -235,6 +298,7 @@ async def jebaited(ctx):
     """Jebaited.... :^)"""
     url = "https://media.discordapp.net/attachments/826739157309063179/859930982186352710/irk_jebaited.png?width=1440&height=156"
     await ctx.send(url)
+    
     
     
 @CLIENT.command(name='nicole')
@@ -250,10 +314,13 @@ async def nicole(ctx):
 
 
 ### B O O K    C L U B     C O M M A N D S ###
+
 @CLIENT.command(name='schedule',
                 enabled=False)
 async def schedule(ctx):
     pass
+
+
 
 @CLIENT.command(name='bookclub',
                 enabled=False)
@@ -261,55 +328,141 @@ async def bookclub(ctx):
     pass
 
 
+
 @CLIENT.command(name='upload')
 async def upload(ctx):
-    filename = ctx.message.attachments[0].filename
-    url = ctx.message.attachments[0].url
-    save_path = "../media/book_club"
-    full_path = os.path.join(save_path, filename)
+    '''Uploads a book to our book club library database. This command is only usable by `Book Club` members.'''
+    author_role_names = [ctx.message.author.roles[idx].name for idx in range(len(ctx.message.author.roles))]
     
     try:
-        embed = discord.Embed(title="Upload Successful",
-                                description="Successfully uploaded {}.".format(filename),
-                                color=0xff0000)
-        embed.add_field(name='filename', value="Download here:\n{}".format(url))
-        await ctx.send(embed=embed)
+        if "Book Club" in author_role_names:
+            attachments = ctx.message.attachments[0]
+            filename = attachments.filename[:-4]
+            url = attachments.url
+            book_club.upload_book(attachments)
             
-    except Exception:
-        embed = discord.Embed(title="Upload Failed.",
-                                description="Failed to uploaded {}. Be sure that the file is in `.pdf` or `.docx` format.".format(filename),
-                                color=0xff0000)
+            emoji = discord.utils.get(CLIENT.emojis, name="AmberHappy")
+            embed = discord.Embed(title="Upload Successful! {}".format(emoji),
+                                  description="Uploading {} was successful, you can download it here:\n{}".format(filename, url),
+                                  color=0xff0000,
+                                  thumbnail=book_club.icon_url)
+            
+            await ctx.send(embed=embed)
+            
+        elif "Book Club" not in author_role_names:
+            raise PermissionError()
+        
+    except PermissionError:
+        emoji = discord.utils.get(CLIENT.emojis, name="AmberSad")
+        embed = discord.Embed(title="Upload failed. {}".format(emoji),
+                            description="Uh oh, the upload failed! Try using `!help upload` for usage instructions.",
+                            color=0xff0000,
+                            thumbnail=book_club.icon_url)
+        
         await ctx.send(embed=embed)
+        
+    
 
-
-@CLIENT.command(name='reading')
+@CLIENT.command(name='reading',
+                aliases=["current_reading"])
 async def reading(ctx):
     '''Gives the current readings for book club.'''
-    current_reading = []
     
-    filenames = _get_book_names()
-    msg = "Our current readings are:\n"
-    n = ""
-    files = []
-    for names in filenames:
-        n += "`{}`\n".format(names)
-        files.append(discord.File("media/book_club/"+"{}".format(names)))
+    current_readings = book_club.get_current_readings()
+    embed = discord.Embed(title="Current Readings",
+                          description="Books we're currently reading for Book Club.",
+                          color=0xff0000,
+                          thumbnail=book_club.icon_url)
+    
+    for book in current_readings:
+        embed.add_field(name=book, value=current_readings[book], inline=False)
         
-    await ctx.send(msg+n)
+    await ctx.send(embed=embed)
     
-    for f in files:
-        await ctx.send(file=f)
-
-
-def _get_book_names():
-    path = "media/book_club"
     
-    files = []
-    for root, dirs, fls in os.walk(path):
-        for name in fls:
-            files.append(name)
+    
+@CLIENT.command(name='toggle',
+                aliases=["toggle_reading"])
+async def toggle_reading(ctx):
+    '''Removes a book from the current reading list. This command is only usable by Café Maids members.'''
+    author_role_names = [ctx.message.author.roles[idx].name for idx in range(len(ctx.message.author.roles))]
+    book_name = ctx.message.content.split()[1]
+    
+    try:
+        if "Café Maid" in author_role_names:
             
-    return files
+            current_book = book_club.books[book_name]
+            book_club.set_current_reading(book_name, is_current_reading=not current_book["current_reading"])
+            
+            emoji = discord.utils.get(CLIENT.emojis, name="AmberHappy")
+            embed = discord.Embed(title="Toggle Successful! {}".format(emoji),
+                                  description="Toggle of `{}` was successful, currently set to `{}`!".format(book_name, 
+                                                                                                         book_club.books[book_name]["current_reading"]),
+                                  color=0xff0000,
+                                  thumbnail=book_club.icon_url)
+            
+            await ctx.send(embed=embed)
+            
+        elif "Café Maid" not in author_role_names:
+            
+            emoji = discord.utils.get(CLIENT.emojis, name="AmberSad")
+            embed = discord.Embed(title="Toggle failed. {}".format(emoji),
+                                description="Uh oh, the toggling of `{}` failed! Try using `!help toggle` for usage instructions.".format(book_name),
+                                color=0xff0000,
+                                thumbnail=book_club.icon_url)
+            
+            await ctx.send(embed=embed)
+        
+        
+    except discord.ext.commads.errors.CommandInvokeError:
+        
+        emoji = discord.utils.get(CLIENT.emojis, name="AmberSad")
+        embed = discord.Embed(title="Toggle failed. {}".format(emoji),
+                            description="Uh oh, the toggling of `{}` failed! Try using `!help toggle` for usage instructions.".format(book_name),
+                            color=0xff0000,
+                            thumbnail=book_club.icon_url)
+        
+        await ctx.send(embed=embed)
+
+
+
+@CLIENT.command(name='delete',
+                aliases=["delete_reading"])
+async def delete_reading(ctx):
+    '''Removes a book to our book club library database. This command is only usable by Café Maids members.'''
+    author_role_names = [ctx.message.author.roles[idx].name for idx in range(len(ctx.message.author.roles))]
+    book_name = ctx.message.content.split()[1]
+    
+    try:
+        if "Café Maid" in author_role_names:
+            
+            book_club.remove_book(book_name)
+            
+            emoji = discord.utils.get(CLIENT.emojis, name="AmberHappy")
+            embed = discord.Embed(title="Deletion Successful! {}".format(emoji),
+                                  description="Deletion of `{}` was successful!".format(book_name),
+                                  color=0xff0000,
+                                  thumbnail=book_club.icon_url)
+            
+            await ctx.send(embed=embed)
+            
+        elif "Café Maid" not in author_role_names:
+            raise PermissionError()
+        
+        
+    except PermissionError:
+        emoji = discord.utils.get(CLIENT.emojis, name="AmberSad")
+        embed = discord.Embed(title="Deletion failed. {}".format(emoji),
+                            description="Uh oh, the deletion of `{}` failed! Try using `!help delete` for usage instructions.".format(book_name),
+                            color=0xff0000,
+                            thumbnail=book_club.icon_url)
+        
+        await ctx.send(embed=embed)
+    
+             
+CLIENT.run(TOKEN)
+
+
 
 # async def time_check():
 #     await CLIENT.wait_until_ready()
@@ -332,6 +485,3 @@ def _get_book_names():
 
 
 # CLIENT.loop.create_task(time_check())
-
-    
-CLIENT.run(TOKEN)
