@@ -310,7 +310,11 @@ async def nicole(ctx):
     await ctx.send(file=discord.File(f))
     
 
-
+@CLIENT.command(name='transracialism')
+async def transracialism(ctx):
+    """Transracialism weeb meme made by Amber."""
+    f = r"media/Destiny_vs._Hugh_Mungus-_The_Power_of_Transracialism_Explodes.mp4"
+    await ctx.send(file=discord.File(f))
 
 
 ### B O O K    C L U B     C O M M A N D S ###
