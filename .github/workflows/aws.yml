@@ -2,32 +2,21 @@ on:
   pull_request:
     branches:
       - master
-
 jobs:
   deploy:
-    name: Deploy
     runs-on: ubuntu-latest
-
     steps:
-    - name: AWS SSM Send-Command Temp
-      # You may pin to the exact commit or the version.
-      # uses: LGB-PUB/aws-ssm-send-command@593e574a8ec5c79515c8e6146449f507bfeafb9e
-      uses: LGB-PUB/aws-ssm-send-command@1.0.2
-      with:
-        # AWS access key id
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        # AWS secret access key
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        # Where EC2 instance is
-        aws-region: us-west-2
-        # AWS EC2 Instance id or ids
-        instance-ids: ${{ secrets.INSTANCE_ID }}
-        # Bash command you want to execute
-        command: run |
-          forever stopall
-          git pull origin master
-          forever start -c python3 scripts/main.py
-        # Command execution location
-        working-directory: /home/ec2-user/Little-Amber
-        # Comment for Send-Command
-        comment: # optional, default is Executed by Github Actions
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.6"
+      - uses: aws-actions/setup-sam@v1
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+      # Build inside Docker containers
+      - run: sam build --use-container
+      # Prevent prompts and failure when the stack is unchanged
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
