@@ -250,16 +250,41 @@ async def nicole(ctx):
 
 
 ### B O O K    C L U B     C O M M A N D S ###
-@CLIENT.command(name='schedule')
+@CLIENT.command(name='schedule',
+                enabled=False)
 async def schedule(ctx):
     pass
 
-@CLIENT.command(name='bookclub')
+@CLIENT.command(name='bookclub',
+                enabled=False)
 async def bookclub(ctx):
     pass
 
+
+@CLIENT.command(name='upload')
+async def upload(ctx):
+    filename = ctx.message.attachments[0].filename
+    url = ctx.message.attachments[0].url
+    save_path = "../media/book_club"
+    full_path = os.path.join(save_path, filename)
+    
+    try:
+        embed = discord.Embed(title="Upload Successful",
+                                description="Successfully uploaded {}.".format(filename),
+                                color=0xff0000)
+        embed.add_field(name='filename', value="Download here:\n{}".format(url))
+        await ctx.send(embed=embed)
+            
+    except Exception:
+        embed = discord.Embed(title="Upload Failed.",
+                                description="Failed to uploaded {}. Be sure that the file is in `.pdf` or `.docx` format.".format(filename),
+                                color=0xff0000)
+        await ctx.send(embed=embed)
+
+
 @CLIENT.command(name='reading')
 async def reading(ctx):
+    '''Gives the current readings for book club.'''
     current_reading = []
     
     filenames = _get_book_names()

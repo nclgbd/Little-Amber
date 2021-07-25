@@ -1,0 +1,8 @@
+{
+    "books":{
+        "AsimovEvidence": {
+            "url" : "https://cdn.discordapp.com/attachments/831715854684520519/866491184020324372/Isaac_Asimov_-Evidence.pdf",
+            "current_reading" : true
+        }
+    }
+}
