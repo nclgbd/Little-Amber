@@ -203,6 +203,8 @@ async def info(ctx):
     embed.set_thumbnail(url="https://media.discordapp.net/attachments/831716059555692584/831963479153967115/831420535941890079.png")
     
     embed.add_field(name='GitHub', value='https://github.com/nclgbd/Little-Amber', inline=True)
+    embed.add_field(name='Submit an Issue!', value="https://github.com/nclgbd/Little-Amber/issues", inline=True)
+    embed.add_field(name='View My Progress', value="https://github.com/nclgbd/Little-Amber/projects/1", inline=True)
     embed.add_field(name='README.md', value="https://github.com/nclgbd/Little-Amber/blob/master/README.md", inline=True)
     
     await ctx.send(embed=embed)
@@ -319,6 +321,28 @@ async def transracialism(ctx):
 
 
 
+@CLIENT.command(name='progress')
+async def progress(ctx):
+    """"Returns what my board for features I'm currently working on! Feel free to submit any issues on my GitHub for new features!"""
+    ret = "Returns what my board for features I'm currently working on! Feel free to submit any issues on my GitHub for new features!\n"
+    url = "https://github.com/nclgbd/Little-Amber/projects/1"
+    await ctx.send("{} {}".format(ret, url))
+    
+    
+
+@CLIENT.command(name='issues')
+async def issues(ctx):   
+    """If you ever want to request a command, you can go to my GitHub here and submit an issue. Note that not all issues will be fulfilled, 
+    and there's no timeline for when things will be completed. Be sure to keep this in mind when submitting a request."""
+    
+    string = '''If you ever want to request a command, you can go to my GitHub here and submit an issue. Note that not all issues will be fulfilled, and there's no timeline for when things will be completed. Be sure to keep this in mind when submitting a request.\n'''
+    url = "https://github.com/nclgbd/Little-Amber/issues"
+    await ctx.send("{} {}".format(string, url))
+  
+    
+    
+    
+    
 
 ### B O O K    C L U B     C O M M A N D S ###
 
@@ -378,8 +402,9 @@ async def reading(ctx):
     current_readings = book_club.get_current_readings()
     embed = discord.Embed(title="Current Readings",
                           description="Books we're currently reading for Book Club.",
-                          color=0xff0000,
-                          thumbnail=book_club.icon_url)
+                          color=0xff0000)
+    
+    embed.set_thumbnail(url=book_club.icon_url)
     
     for book in current_readings:
         embed.add_field(name=book, value=current_readings[book], inline=False)
@@ -407,6 +432,7 @@ async def toggle_reading(ctx):
                                                                                                          book_club.books[book_name]["current_reading"]),
                                   color=0xff0000,
                                   thumbnail=book_club.icon_url)
+            embed.set_thumbnail(url=book_club.icon_url)
             
             await ctx.send(embed=embed)
             
@@ -417,6 +443,7 @@ async def toggle_reading(ctx):
                                 description="Uh oh, the toggling of `{}` failed! Try using `!help toggle` for usage instructions.".format(book_name),
                                 color=0xff0000,
                                 thumbnail=book_club.icon_url)
+            embed.set_thumbnail(url=book_club.icon_url)
             
             await ctx.send(embed=embed)
         
@@ -428,6 +455,7 @@ async def toggle_reading(ctx):
                             description="Uh oh, the toggling of `{}` failed! Try using `!help toggle` for usage instructions.".format(book_name),
                             color=0xff0000,
                             thumbnail=book_club.icon_url)
+        embed.set_thumbnail(url=book_club.icon_url)
         
         await ctx.send(embed=embed)
 
@@ -450,6 +478,7 @@ async def delete_reading(ctx):
                                   description="Deletion of `{}` was successful!".format(book_name),
                                   color=0xff0000,
                                   thumbnail=book_club.icon_url)
+            embed.set_thumbnail(url=book_club.icon_url)
             
             await ctx.send(embed=embed)
             
