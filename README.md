@@ -22,6 +22,7 @@ This is Little Amber, a bot I created to help manage the links in Amber's server
 * `!reading` - Gives the current readings for book club.
 * `!toggle` - Removes a book from the current reading list. This command is only usable by Café Maids members.
 * `!delete` - Removes a book to our book club library database. This command is only usable by Café Maids members.
+* `!transracialism` - Transracialism weeb meme made by Amber.
 
 ## Usage
 If (~~for some inexplicable reason~~) you'd like fork this bot and use it for yourself, great! Just know...
