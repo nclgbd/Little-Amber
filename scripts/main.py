@@ -503,10 +503,15 @@ CLIENT.run(TOKEN)
 @CLIENT.command(name='test',
                 aliases=["test_func"])
 async def test_func(ctx):
+    
     await time_check()
 
 
 async def time_check():
+    """
+    Get hour and minute: https://stackoverflow.com/questions/63398646/discord-py-send-message-at-a-specific-hour-and-date
+    Get current weekday: https://stackoverflow.com/questions/9847213/how-do-i-get-the-day-of-week-given-a-date
+    """
     await CLIENT.wait_until_ready()
     
     date = datetime.now(tz=pytz.utc)
