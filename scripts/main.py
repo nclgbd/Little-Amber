@@ -6,10 +6,12 @@ import discord
 import json
 import re
 import os
+import pytz
 
 from discord.ext import commands
 from discord.ext.commands import Bot
 from datetime import datetime, timedelta
+from pytz import timezone
 
 
 
@@ -59,10 +61,9 @@ TOKEN = bot_info["token"]
 CLIENT = commands.Bot(command_prefix = PREFIX)
 CLIENT_ID = bot_info["client_id"]
 ME = bot_info["me"]
-ALARM_TIME = '23:29'#24hrs
 
 START_TIME = datetime.utcnow()
-print(START_TIME)
+
 
 class BookClub:
     
@@ -499,25 +500,40 @@ async def delete_reading(ctx):
 CLIENT.run(TOKEN)
 
 
-
-# async def time_check():
-#     await CLIENT.wait_until_ready()
-#     while not CLIENT.is_closed:
-#         channel = CLIENT.get_channel(CHANNEL_MAPPING["bot-testing"])
-#         messages = ('Test')
-#         f = '%H:%M'
-
-#         now = datetime.strftime(datetime.now(), f)
-#         # get the difference between the alarm time and now
-#         diff = (datetime.strptime(ALARM_TIME, f) - datetime.strptime(now, f)).total_seconds()
-
-#         # create a scheduler
-#         s = sched.scheduler(time.perf_counter, time.sleep)
-#         # arguments being passed to the function being called in s.enter
-#         args = (CLIENT.send_message(channel, message), )
-#         # enter the command and arguments into the scheduler
-#         s.enter(seconds, 1, CLIENT.loop.create_task, args)
-#         s.run() # run the scheduler, will block the event loop
+@CLIENT.command(name='test',
+                aliases=["test_func"])
+async def test_func(ctx):
+    await time_check()
 
 
-# CLIENT.loop.create_task(time_check())
+async def time_check():
+    await CLIENT.wait_until_ready()
+    
+    date = datetime.now(tz=pytz.utc)
+    date = date.astimezone(timezone('US/Pacific'))
+    wkdy = date.weekday()
+    while not CLIENT.is_closed:
+        hour = 13
+        minute = 29
+        message = 'test'
+        channel = CLIENT.get_channel(CHANNEL_MAPPING["bot-testing"])
+        curr = get_pst_time()
+        hours = int(curr.time().strftime("%H"))
+        minutes = int(curr.time().strftime("%M"))
+        
+        print("{}:{} Weekday:{}".format(hours, minutes, wkdy))
+        
+        if hours == 17 and minutes <= 29 and wkdy == 6:
+            await channel.send(message)
+            
+            
+            
+async def get_pst_time():
+    date_format='%m_%d_%Y_%H_%M_%S_%Z'
+    date = datetime.now(tz=pytz.utc)
+    date = date.astimezone(timezone('US/Pacific'))
+    pstDateTime=date.strftime(date_format)
+    return pstDateTime
+
+
+CLIENT.loop.create_task(time_check())
