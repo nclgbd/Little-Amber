@@ -3,8 +3,7 @@
 # platform: win-64
 name: base
 dependencies:
-  - pip==20.1.1=pypi_0
-  -pip:
+  - pip:
     - cryptography==2.3.1=py35h74b6da3_0
     - murmurhash==0.28.0=py35h6538335_1000
     - pycparser==2.20=pyh9f0ad1d_2
