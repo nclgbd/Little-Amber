@@ -23,7 +23,6 @@ dependencies:
   - dill=0.2.8.2
   - gast=0.3.3
   - grpcio=1.12.1
-  - icc_rt=2019.0.0
   - idna=2.10
   - intel-openmp=2019.4
   - joblib=0.14.1
@@ -45,7 +44,6 @@ dependencies:
   - protobuf=3.6.0
   - pycparser=2.20
   - pyopenssl=18.0.0
-  - pyreadline=2.1
   - pysocks=1.6.8
   - python=3.5.6
   - python-dateutil=2.8.1
@@ -68,11 +66,8 @@ dependencies:
   - tqdm=4.47.0
   - ujson=1.35
   - urllib3=1.25.9
-  - vc=14.1
-  - vs2015_runtime=14.16.27012
   - werkzeug=1.0.1
   - wheel=0.31.1
-  - win_inet_pton=1.0.1
   - wincertstore=0.2
   - wrapt=1.10.11
   - zlib=1.2.11
@@ -89,4 +84,10 @@ dependencies:
     - pip==20.1.1
     - typing-extensions==3.7.4.3
     - yarl==1.5.1
+    - wincertstore=0.2
+    - icc_rt=2019.0.0
+    - win_inet_pton=1.0.1
+    - vc=14.1
+    - pyreadline=2.1
+    - vs2015_runtime=14.16.27012
 prefix: C:\Users\nicol\Anaconda3\envs\ben_bot
