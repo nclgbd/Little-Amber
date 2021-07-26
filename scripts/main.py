@@ -10,8 +10,7 @@ import os
 from discord.ext import commands
 from discord.ext.commands import Bot
 from datetime import datetime, timedelta
-from db.commands import upsert_command, delete_command,query_command
-from db.setup import initialize_db
+
 
 
 CHANNEL_NAMES = ["philosophy", "religion", "psychology", "sociology", "economics", "us-politics",
@@ -123,7 +122,6 @@ book_club = BookClub("media/book_club/books.json")
 @CLIENT.event
 async def on_ready():
     print('Logged in as')
-    initialize_db() # db init
     print(CLIENT.user.name)
     print('------')
     
@@ -147,31 +145,6 @@ async def on_message(message):
                 await channel.send(message.content + " from: " + str(message.author.display_name))
     
     await CLIENT.process_commands(message)
-# DB Commands
-@CLIENT.event
-async def on_command_error(ctx, error):
-    message = ctx.message.content.split()[0]
-    echo = commands.query_command(message)
-    if(echo != ''):
-        await ctx.send(echo)
-    else:
-        pass
-
-@CLIENT.command(name="set",description="sets a command")
-async def set_command(ctx):
-    content = ctx.message.content.split()
-    if content[1] !== '' and content[2] !== '':
-        await commands.upsert_command(content[1],content[2])
-        await ctx.send('command added')
-    pass
-
-@CLIENT.command(name="del",description="deletes a command")
-async def delete_command(ctx):
-    content = ctx.message.content.split()
-    if content[1] !== '':
-        await commands.del_command(content[1])
-        await ctx.send('command added')
-    pass
 
 
 
