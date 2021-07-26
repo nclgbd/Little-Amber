@@ -18,12 +18,12 @@ jobs:
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
         echo $CONDA/bin >> $GITHUB_PATH
+        source ~/.bashrc
+        conda init bash
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         conda create -n discord-bot python=3.5 pip
-        source ~/.bashrc
-        conda init bash
         conda activate discord-bot
         conda install pip
         pip install flake8 pytest discord
