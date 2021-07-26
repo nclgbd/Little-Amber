@@ -86,7 +86,6 @@ dependencies:
     - yarl==1.5.1
     - wincertstore=0.2
     - icc_rt=2019.0.0
-    - win_inet_pton=1.0.1
     - vc=14.1
     - pyreadline=2.1
     - vs2015_runtime=14.16.27012
