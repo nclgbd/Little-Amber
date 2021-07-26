@@ -3,6 +3,7 @@
 # platform: win-64
 name: base
 dependencies:
+  - pip==20.1.1=pypi_0
   -pip:
     - cryptography==2.3.1=py35h74b6da3_0
     - murmurhash==0.28.0=py35h6538335_1000
@@ -46,7 +47,6 @@ dependencies:
     - idna-ssl==1.1.0=pypi_0
     - pandas==0.23.4=py35h830ac7b_0
     - openssl==1.0.2u=hfa6e2cd_0
-    - pip==20.1.1=pypi_0
     - python==3.5.6=he025d50_0
     - multidict==4.7.6=pypi_0
     - libprotobuf==3.6.0=h1a1b453_0
