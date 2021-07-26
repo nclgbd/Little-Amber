@@ -21,6 +21,10 @@ jobs:
         source ~/.bashrc
         conda init bash
     - name: Install dependencies
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-activate-base: false
+        activate-environment: "discord-bot"
       run: |
         python -m pip install --upgrade pip
         conda create -n discord-bot python=3.5 pip
