@@ -160,7 +160,7 @@ async def on_command_error(ctx, error):
 @CLIENT.command(name="set",description="sets a command")
 async def set_command(ctx):
     content = ctx.message.content.split()
-    if content[1] !== '' and content[2] !== '':
+    if content[1] != '' and content[2] != '':
         await commands.upsert_command(content[1],content[2])
         await ctx.send('command added')
     pass
@@ -168,7 +168,7 @@ async def set_command(ctx):
 @CLIENT.command(name="del",description="deletes a command")
 async def delete_command(ctx):
     content = ctx.message.content.split()
-    if content[1] !== '':
+    if content[1] != '':
         await commands.del_command(content[1])
         await ctx.send('command added')
     pass
