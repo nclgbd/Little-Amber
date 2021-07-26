@@ -1,0 +1,65 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: win-64
+name: base
+dependencies:
+  -pip:
+    - cryptography==2.3.1=py35h74b6da3_0
+    - murmurhash==0.28.0=py35h6538335_1000
+    - pycparser==2.20=pyh9f0ad1d_2
+    - msgpack-numpy==0.4.6.post0=pyh9f0ad1d_0
+    - numpy-base==1.15.2=py35h8128ebf_0
+    - vs2015_runtime==14.16.27012=hf0eaf9b_3
+    - certifi==2018.8.24=py35_1001
+    - discord==1.0.1=pypi_0
+    - aiohttp==3.6.3=pypi_0
+    - mkl_fft==1.0.6=py35hdbbee80_0
+    - cffi==1.11.5=py35hfa6e2cd_1
+    - preshed==1.0.0=py35h6538335_0
+    - scipy==1.1.0=py35h4f6bf74_1
+    - thinc==6.10.3=py35h830ac7b_3
+    - mkl_random==1.0.1=py35h77b88f5_1
+    - zlib==1.2.11=h62dcd97_4
+    - tbb==2020.0=h74a9793_0
+    - tensorboard==1.10.0=py35he025d50_0
+    - asn1crypto==0.24.0=py35_3
+    - chardet==3.0.4=py35_3
+    - protobuf==3.6.0=py35he025d50_0
+    - wrapt==1.10.11=py35hfa6e2cd_1
+    - tbb4py==2018.0.5=py35he980bc4_0
+    - en-core-web-sm==2.0.0=pypi_0
+    - async-timeout==3.0.1=pypi_0
+    - typing-extensions==3.7.4.3=pypi_0
+    - ca-certificates==2020.6.20=hecda079_0
+    - tensorflow-base==1.10.0=gpu_py35h6e53903_0
+    - msgpack-python==0.5.6=py35he980bc4_3
+    - yarl==1.5.1=pypi_0
+    - plac==0.9.6=py_1
+    - pysocks==1.6.8=py35_2
+    - spacy==2.0.12=py35h830ac7b_0
+    - numpy==1.15.2=py35ha559c80_0
+    - icc_rt==2019.0.0=h0cc432a_1
+    - grpcio==1.12.1=py35h1a1b453_0
+    - intel-openmp==2019.4=245
+    - cytoolz==0.9.0.1=py35hfa6e2cd_0
+    - pyreadline==2.1=py35_1000
+    - idna-ssl==1.1.0=pypi_0
+    - pandas==0.23.4=py35h830ac7b_0
+    - openssl==1.0.2u=hfa6e2cd_0
+    - pip==20.1.1=pypi_0
+    - python==3.5.6=he025d50_0
+    - multidict==4.7.6=pypi_0
+    - libprotobuf==3.6.0=h1a1b453_0
+    - discord-py==1.6.0=pypi_0
+    - regex==2017.11.09=py35_0
+    - brotlipy==0.7.0=py35hfa6e2cd_0
+    - attrs==20.3.0=pypi_0
+    - cudatoolkit==9.0=1
+    - tensorflow==1.10.0=gpu_py35ha5d5ef7_0
+    - cymem==1.31.2=py35h6538335_0
+    - ujson==1.35=py35hfa6e2cd_1001
+    - win_inet_pton==1.0.1=py35_2
+    - requests==2.24.0=pyh9f0ad1d_0
+    - wincertstore==0.2=py35hfebbdb8_0
+    - vc==14.1=h0510ff6_4
+    - idna==2.10=pyh9f0ad1d_0
