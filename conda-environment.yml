@@ -84,7 +84,6 @@ dependencies:
     - pip==20.1.1
     - typing-extensions==3.7.4.3
     - yarl==1.5.1
-    - wincertstore=0.2
     - icc_rt=2019.0.0
     - vc=14.1
     - pyreadline=2.1
