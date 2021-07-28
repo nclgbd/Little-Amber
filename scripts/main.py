@@ -60,7 +60,6 @@ TOKEN = bot_info["token"]
 CLIENT = commands.Bot(command_prefix = PREFIX)
 CLIENT_ID = bot_info["client_id"]
 ME = bot_info["me"]
-TENOR_API_KEY = bot_info["tenor-api-key"]
 ALARM_TIME = '23:29'#24hrs
 
 START_TIME = datetime.utcnow()
