@@ -6,6 +6,7 @@ import discord
 import json
 import re
 import os
+import random
 
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -166,6 +167,17 @@ async def epiphany(ctx):
     epi_url = "https://media.discordapp.net/attachments/826739157309063179/832372910391820299/unknown.png?width=1440&height=169"
     await ctx.send(epi_url)
 
+
+
+
+@CLIENT.command(name='soapy')
+async def soapy(ctx):
+    '''Posts a raccoon. for Soapy <3~'''
+    
+    _, _, file_names = os.walk("media/raccoons").__next__()
+    fl = discord.File("media/raccoons/{}".format(random.choice(file_names)))
+    await ctx.send(file=fl)
+    
     
     
 @CLIENT.command(name='readme',
