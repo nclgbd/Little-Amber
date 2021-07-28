@@ -6,6 +6,7 @@ import discord
 import json
 import re
 import os
+import random
 
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -166,6 +167,17 @@ async def epiphany(ctx):
     epi_url = "https://media.discordapp.net/attachments/826739157309063179/832372910391820299/unknown.png?width=1440&height=169"
     await ctx.send(epi_url)
 
+
+
+
+@CLIENT.command(name='soapy')
+async def soapy(ctx):
+    '''Posts a raccoon. for Soapy <3~'''
+    
+    _, _, file_names = os.walk("media/raccoons").__next__()
+    fl = discord.File("media/raccoons/{}".format(random.choice(file_names)))
+    await ctx.send(file=fl)
+    
     
     
 @CLIENT.command(name='readme',
@@ -311,6 +323,7 @@ async def nicole(ctx):
     f = r"media/nicole_nippon.mp3"
     await ctx.send(file=discord.File(f))
     
+    
 
 @CLIENT.command(name='transracialism',
                 enabled=False)
@@ -338,8 +351,24 @@ async def issues(ctx):
     string = '''If you ever want to request a command, you can go to my GitHub here and submit an issue. Note that not all issues will be fulfilled, and there's no timeline for when things will be completed. Be sure to keep this in mind when submitting a request.\n'''
     url = "https://github.com/nclgbd/Little-Amber/issues"
     await ctx.send("{} {}".format(string, url))
-  
     
+    
+
+@CLIENT.command(name='typing')
+async def typing(ctx): 
+    '''Amber is typing...'''
+    emoji = discord.utils.get(CLIENT.emojis, name="Typing")
+    await ctx.send("{} **Amber** is typing...".format(emoji))
+    
+    
+    
+@CLIENT.command(name='dimden')
+async def dimden(ctx):
+    '''Posts dimden.'''
+    
+    _, _, file_names = os.walk("media/dimden").__next__()
+    fl = discord.File("media/dimden/{}".format(random.choice(file_names)))
+    await ctx.send(file=fl)
     
     
     
