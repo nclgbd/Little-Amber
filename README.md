@@ -25,6 +25,7 @@ This is Little Amber, a bot I created to help manage the links in Amber's server
 * `!transracialism` - Transracialism weeb meme made by Amber.
 * `!typing` - **Amber** is typing...
 * `!soapy` - Posts a raccoon. for Soapy <3~
+* `!dimden` - Probably my favorite command, if you don't know who dimden is Google him and you're welcome in advance
 
 ## Usage
 If (~~for some inexplicable reason~~) you'd like fork this bot and use it for yourself, great! Just know...
