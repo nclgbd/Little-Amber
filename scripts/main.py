@@ -60,6 +60,7 @@ TOKEN = bot_info["token"]
 CLIENT = commands.Bot(command_prefix = PREFIX)
 CLIENT_ID = bot_info["client_id"]
 ME = bot_info["me"]
+TENOR_API_KEY = bot_info["tenor-api-key"]
 ALARM_TIME = '23:29'#24hrs
 
 START_TIME = datetime.utcnow()
@@ -359,6 +360,16 @@ async def typing(ctx):
     '''Amber is typing...'''
     emoji = discord.utils.get(CLIENT.emojis, name="Typing")
     await ctx.send("{} **Amber** is typing...".format(emoji))
+    
+    
+    
+@CLIENT.command(name='dimden')
+async def dimden(ctx):
+    '''Posts dimden.'''
+    
+    _, _, file_names = os.walk("media/dimden").__next__()
+    fl = discord.File("media/dimden/{}".format(random.choice(file_names)))
+    await ctx.send(file=fl)
     
     
     
