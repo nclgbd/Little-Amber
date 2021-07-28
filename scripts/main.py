@@ -311,6 +311,7 @@ async def nicole(ctx):
     f = r"media/nicole_nippon.mp3"
     await ctx.send(file=discord.File(f))
     
+    
 
 @CLIENT.command(name='transracialism',
                 enabled=False)
@@ -338,8 +339,14 @@ async def issues(ctx):
     string = '''If you ever want to request a command, you can go to my GitHub here and submit an issue. Note that not all issues will be fulfilled, and there's no timeline for when things will be completed. Be sure to keep this in mind when submitting a request.\n'''
     url = "https://github.com/nclgbd/Little-Amber/issues"
     await ctx.send("{} {}".format(string, url))
-  
     
+    
+
+@CLIENT.command(name='typing')
+async def typing(ctx): 
+    '''Amber is typing...'''
+    emoji = discord.utils.get(CLIENT.emojis, name="Typing")
+    await ctx.send("{} **Amber** is typing...".format(emoji))
     
     
     
