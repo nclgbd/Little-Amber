@@ -43,8 +43,7 @@ jobs:
       run: |
         pwd
         ls -la config/.ssh/
-        cat config/.ssh/ec2tutkey.pem
-        ssh-keyscan -H github.com > ~/.ssh/known_hosts
+        cat ~/.ssh/known_hosts
         ssh -i "config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/\n
         forever stopall\n
