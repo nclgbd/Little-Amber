@@ -185,8 +185,11 @@ async def soapy(ctx):
     '''Posts raccoons for Soapy~.'''
     _, _, file_names = os.walk("media/raccoons").__next__()
     fl = discord.File("media/raccoons/{}".format(random.choice(file_names)))
-    options = [fl, await TENOR.arandom('raccoon')]
-    await ctx.send(random.choice(options))
+    file_option = random.choice([fl, await TENOR.arandom('raccoon')])
+    if type(file_option) == discord.file.File:
+        await ctx.send(file=file_option)
+    else:
+        await ctx.send(file_option)
     
     
     
