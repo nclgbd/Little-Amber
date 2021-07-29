@@ -73,7 +73,7 @@ class BookClub:
     
     def __init__(self, file_path):
         
-        self.icon_url = "https://media.discordapp.net/attachments/827394666383147048/866946006330114058/ash_pfp_0.png"
+        self.icon_url = "https://media.discordapp.net/attachments/826743475143311390/870399372603580487/wackydebaters.gif"
         self.file_path = file_path
         with open(self.file_path, "r") as f:
             self.books = dict(json.load(f))
@@ -129,7 +129,6 @@ async def on_ready():
     print('Logged in as')
     print(CLIENT.user.name)
     print('------')
-    
     
     await CLIENT.change_presence(activity=discord.Game(name='Studying...', type=1))
     
@@ -204,7 +203,7 @@ async def kira(ctx):
 @CLIENT.command(name='readme',
                 description="Gives the link to the README.md")
 async def read_me(ctx):
-    """If the stemlords that actually care about the code, this is your command. Or !info"""
+    """If the stemlords that actually care about the code, this is your command. Or `!info`"""
     url = "https://github.com/nclgbd/Little-Amber/blob/master/README.md"
     await ctx.send(url)
     
@@ -393,21 +392,24 @@ async def dimden(ctx):
 
 ### B O O K    C L U B     C O M M A N D S ###
 
-@CLIENT.command(name='schedule',
+@CLIENT.group(name='bookclub',
+              invoke_without_command=True)
+async def bookclub(ctx):
+    """Book Club is held every Sunday at 1:00PM PST. We typically read books and short stories about history, politics, philosophy, etc. Our reading pace is about 30-50 pages a week, depending on the material. You can sign up for all BC notifications with the "Book Club" role. You can also choose the "Book Club (Waiting)" sign up for notifications only when we are starting a new book or short story. Even if you aren't reading the material, please still feel free to join the Sunday VC sessions just to listen in!"""
+    
+    string = """Book Club is held ***every Sunday at 1:00PM PST***. We typically read books and short stories about history, politics, philosophy, etc. Our reading pace is about 30-50 pages a week, depending on the material. You can sign up for all BC notifications with the "Book Club" role. You can also choose the "Book Club (Waiting)" sign up for notifications only when we are starting a new book or short story. Even if you aren't reading the material, please still feel free to join the Sunday VC sessions just to listen in! For more details about the available commands, use `!help` bookclub"""
+    await ctx.send(string)
+    
+
+
+@bookclub.command(name='schedule',
                 enabled=False)
 async def schedule(ctx):
     pass
 
 
 
-@CLIENT.command(name='bookclub',
-                enabled=False)
-async def bookclub(ctx):
-    pass
-
-
-
-@CLIENT.command(name='upload')
+@bookclub.command(name='upload')
 async def upload(ctx):
     '''Uploads a book to our book club library database. This command is only usable by `Book Club` members.'''
     author_role_names = [ctx.message.author.roles[idx].name for idx in range(len(ctx.message.author.roles))]
@@ -441,7 +443,7 @@ async def upload(ctx):
         
     
 
-@CLIENT.command(name='reading',
+@bookclub.command(name='reading',
                 aliases=["current_reading"])
 async def reading(ctx):
     '''Gives the current readings for book club.'''
@@ -460,12 +462,12 @@ async def reading(ctx):
     
     
     
-@CLIENT.command(name='toggle',
+@bookclub.command(name='toggle',
                 aliases=["toggle_reading"])
 async def toggle_reading(ctx):
     '''Removes a book from the current reading list. This command is only usable by Café Maids members.'''
     author_role_names = [ctx.message.author.roles[idx].name for idx in range(len(ctx.message.author.roles))]
-    book_name = ctx.message.content.split()[1]
+    book_name = ctx.message.content.split()[2]
     
     try:
         if "Café Maid" in author_role_names:
@@ -495,7 +497,7 @@ async def toggle_reading(ctx):
             await ctx.send(embed=embed)
         
         
-    except discord.ext.commads.errors.CommandInvokeError:
+    except discord.ext.commands.errors.CommandInvokeError:
         
         emoji = discord.utils.get(CLIENT.emojis, name="AmberSad")
         embed = discord.Embed(title="Toggle failed. {}".format(emoji),
@@ -508,12 +510,12 @@ async def toggle_reading(ctx):
 
 
 
-@CLIENT.command(name='delete',
+@bookclub.command(name='delete',
                 aliases=["delete_reading"])
 async def delete_reading(ctx):
     '''Removes a book to our book club library database. This command is only usable by Café Maids members.'''
     author_role_names = [ctx.message.author.roles[idx].name for idx in range(len(ctx.message.author.roles))]
-    book_name = ctx.message.content.split()[1]
+    book_name = ctx.message.content.split()[2]
     
     try:
         if "Café Maid" in author_role_names:
