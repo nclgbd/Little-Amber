@@ -37,7 +37,7 @@ jobs:
         aws_key=${ssh_dir}/ec2tutkey.pem
         mkdir -p ${ssh_dir}
         touch ${aws_key}
-        echo '${${{ secrets.EC2TUTKEY }}}' >> ${aws_key}
+        echo '${{ secrets.EC2TUTKEY }}' >> ${aws_key}
         cat ${aws_key}
         chmod 400 ${aws_key}
     - name: automerge
