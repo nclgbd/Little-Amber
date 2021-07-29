@@ -11,7 +11,7 @@ on:
     branches: [ master ]
 
 jobs:
-  configure-env:
+  launch-application:
     runs-on: ubuntu-latest
 
     steps:
@@ -38,10 +38,10 @@ jobs:
         mkdir -p ${ssh_dir}
         aws_key=${ssh_dir}/ec2tutkey.pem
         touch ${aws_key}
-        echo '${{ secrets.EC2TUTKEY }}' >> ${aws_key}   
+        echo '${{ secrets.EC2TUTKEY }}' > ${aws_key}   
         
-        chmod 400 ${aws_key}
-        ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+        sudo chmod 600 ${aws_key}
+        sudo ssh-keyscan -H github.com >> ~/.ssh/known_hosts
     - name: pull application and deploy
       if: success()
       run: |
