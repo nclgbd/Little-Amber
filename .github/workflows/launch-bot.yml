@@ -41,7 +41,7 @@ jobs:
         echo '${{ secrets.EC2TUTKEY }}' > ${aws_key}   
         
         sudo chmod 600 ${aws_key}
-        sudo ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+        git pull origin master << yes
     - name: pull application and deploy
       if: success()
       run: |
