@@ -7,6 +7,7 @@ on:
   push:
     branches: [ setup-config ]
   pull_request:
+    types: [ closed ]
     branches: [ master ]
 
 jobs:
@@ -15,23 +16,37 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setting up Python 3.6
+    - name: setting up python 3.6
       uses: actions/setup-python@v2
       with:
         python-version: 3.6
-    - name: Configuring AWS credentials
+    - name: configuring aws credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
-    - name: Copying SSH key
+    - name: copying ssh key
       run: |
         mkdir -p config/.ssh/
         touch config/.ssh/ec2tutkey.pem
         echo '${${{ secrets.EC2TUTKEY }}}' >> config/.ssh/ec2tutkey.pem
         cat config/.ssh/ec2tutkey.pem
         chmod 400 config/.ssh/ec2tutkey.pem
-        chmod +x launch.sh
-        ls -la
-        ssh -i "./config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "bash ./launch.sh"
+        # chmod +x launch.sh
+        # ls -la
+        # ssh -i "./config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "bash ./launch.sh"
+      - name: automerge
+        uses: "pascalgn/automerge-action@v0.14.2"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - name: pull and deploy
+        run: |
+          ssh -i "./config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com
+          cd Little-Amber/ || return
+          forever stopall
+          git commit -am "Syncing Library"
+          git pull origin master < ${{ secrets.SSH_PASSPHRASE }}
+          forever start -c python3 scripts/main.py
+          
+    
