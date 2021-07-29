@@ -27,7 +27,7 @@ jobs:
         aws-region: us-west-2
     - name: Copying SSH key...
       run: |
-        mkdir config/.ssh/
+        mkdir -p config/.ssh/
         touch config/.ssh/ec2tutkey.pem
         cat {{ secrets.EC2TUTKEY }} > $(pwd)/Little-Amber/config/.ssh/ec2tutkey.pem
         chmod 400 $(pwd)/Little-Amber/config/.ssh/ec2tutkey.pem
