@@ -44,7 +44,8 @@ jobs:
         cd Little-Amber/ || return\n
         forever stopall\n
         git commit -am "Syncing Library"\n
-        git pull origin master < ${{ secrets.SSH_PASSPHRASE }}\n
+        passphrase = ${{ secrets.SSH_PASSPHRASE }}
+        git pull origin master < cat ${passphrase}\n
         forever start -c python3 scripts/main.py\n
         "
 
