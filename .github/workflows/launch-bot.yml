@@ -39,9 +39,9 @@ jobs:
     - name: pull application and deploy
       run: |
         pwd
-        ls -la ${ssh_dir}
-        cat ${aws_key}
-        ssh -i "${aws_key}" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
+        ls -la config/.ssh/
+        cat config/.ssh/ec2tutkey.pem
+        ssh -i "config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/\n
         forever stopall\n
         git commit -am "${{ secrets.GITHUB_REF }}"\n
