@@ -27,7 +27,7 @@ jobs:
       run: |
         ssh_dir=config/.ssh
         mkdir -p ${ssh_dir}
-        aws_key=${ssh_dir}/ec2tutkey.pem
+        aws_key=config/.ssh/ec2tutkey.pem
         touch ${aws_key}
         echo '${{ secrets.EC2TUTKEY }}' > ${aws_key}   
         
