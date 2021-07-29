@@ -35,18 +35,23 @@ jobs:
       env:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         PULL_REQUEST: "${{ secrets.GITHUB_REF }}"
-    - name: copying ssh key and deploy
+    - name: copying ssh key
+      run: |
+        ssh_dir=~/.ssh
+        mkdir -p ${ssh_dir}
+        aws_key=${ssh_dir}/ec2tutkey.pem
+        touch ${aws_key}
+        echo '${{ secrets.EC2TUTKEY }}' >> ${aws_key}   
+    - name: pull application and deploy
       if: success()
       run: |
         ssh_dir=~/.ssh
         aws_key=${ssh_dir}/ec2tutkey.pem
-        mkdir -p ${ssh_dir}
-        touch ${aws_key}
-        echo '${{ secrets.EC2TUTKEY }}' >> ${aws_key}
         ls -la ${ssh_dir}
         chmod 400 ${aws_key}
+
         ssh -i "${aws_key}" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
-        cd Little-Amber/ || return\n
+        cd Little-Amber/\n
         forever stopall\n
         git commit -am "${{ secrets.GITHUB_REF }}"\n
         passphrase = ${{ secrets.SSH_PASSPHRASE }}
