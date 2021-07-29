@@ -48,6 +48,7 @@ jobs:
         ssh_dir=~/.ssh
         aws_key=${ssh_dir}/ec2tutkey.pem
         ls -la ${ssh_dir}
+        cat ${ssh_dir}/known_hosts
 
         ssh -i "${aws_key}" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/\n
