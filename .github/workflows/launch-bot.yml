@@ -41,22 +41,21 @@ jobs:
         echo '${{ secrets.EC2TUTKEY }}' > ${aws_key}   
         
         sudo chmod 600 ${aws_key}
-        git config pull.ff only
-        git pull
     - name: pull application and deploy
-      if: success()
       run: |
         ssh_dir=~/.ssh
         aws_key=${ssh_dir}/ec2tutkey.pem
         ls -la ${ssh_dir}
         cat ${ssh_dir}/known_hosts
 
+        git config pull.ff only
+        git pull
+
         ssh -i "${aws_key}" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/\n
         forever stopall\n
         git commit -am "${{ secrets.GITHUB_REF }}"\n
         passphrase = ${{ secrets.SSH_PASSPHRASE }}
-        git pull > $(cat ${passphrase})\n
         forever start -c python3 scripts/main.py\n
         "
 
