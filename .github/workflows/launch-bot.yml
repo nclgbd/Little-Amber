@@ -31,5 +31,5 @@ jobs:
         touch config/.ssh/ec2tutkey.pem
         echo '${${{ secrets.EC2TUTKEY }}}' >> config/.ssh/ec2tutkey.pem
         chmod 400 config/.ssh/ec2tutkey.pem
-        ls -la config/.ssh/
+        ls -la
         ssh -i "./config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "bash ./launch.sh"
