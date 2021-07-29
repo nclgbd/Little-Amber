@@ -41,7 +41,8 @@ jobs:
         echo '${{ secrets.EC2TUTKEY }}' > ${aws_key}   
         
         sudo chmod 600 ${aws_key}
-        git pull origin master << yes
+        git config pull.ff only
+        git pull
     - name: pull application and deploy
       if: success()
       run: |
