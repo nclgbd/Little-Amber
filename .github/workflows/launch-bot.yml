@@ -23,6 +23,15 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.6
+    - name: copying ssh key
+      run: |
+        ssh_dir=~/.ssh
+        mkdir -p ${ssh_dir}
+        aws_key=${ssh_dir}/ec2tutkey.pem
+        touch ${aws_key}
+        echo '${{ secrets.EC2TUTKEY }}' > ${aws_key}   
+        
+        sudo chmod 600 ${aws_key}
     - name: pull application and deploy
       run: |
         git config pull.ff only
