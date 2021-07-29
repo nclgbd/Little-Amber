@@ -26,12 +26,14 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
     - name: Copying SSH key...
+      id: copy-ssh-key
       run: |
         mkdir -p config/.ssh/
         touch config/.ssh/ec2tutkey.pem
-        echo "${${{ secrets.EC2TUTKEY }}}" > config/.ssh/ec2tutkey.pem
+        echo "${${{ secrets.EC2TUTKEY }}}" >> config/.ssh/ec2tutkey.pem
         chmod 400 config/.ssh/ec2tutkey.pem
     - name: Attempting to deploy Little Amber...
+      needs: copy-ssh-key
       run: |
         ls -la config/
         ssh -i "config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "bash ./launch.sh"
