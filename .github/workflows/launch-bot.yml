@@ -33,4 +33,4 @@ jobs:
         chmod 400 config/.ssh/ec2tutkey.pem
     - name: Attempting to deploy Little Amber...
       run: |
-        ssh -i "config/.ssh/ec2tutkey.pem" ${{ secrets.ADDRESS }} "bash ./launch.sh"
+        ssh -i "config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "bash ./launch.sh"
