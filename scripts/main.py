@@ -163,24 +163,35 @@ async def wacky_debators(ctx):
     
 
 
+# @CLIENT.command(name='epiphany',
+#                 aliases=['epi'])
+# async def epiphany(ctx):
+#     """amber suck my dick fuck you oh my god i fucking hate you why did we replace bullet with someone even more arrogant and 
+#     bratty and how the fuck is it even possible that such a person can exist jesus fucking christ"""
+#     epi_url = "https://media.discordapp.net/attachments/826739157309063179/832372910391820299/unknown.png?width=1440&height=169"
+#     await ctx.send(epi_url)
+
 @CLIENT.command(name='epiphany',
-                aliases=['epi'])
+                aliases=["bunny", "epi", "rabbit", "bun"])
 async def epiphany(ctx):
-    """amber suck my dick fuck you oh my god i fucking hate you why did we replace bullet with someone even more arrogant and 
-    bratty and how the fuck is it even possible that such a person can exist jesus fucking christ"""
-    epi_url = "https://media.discordapp.net/attachments/826739157309063179/832372910391820299/unknown.png?width=1440&height=169"
-    await ctx.send(epi_url)
+    '''For the bunny guy~.'''
+    await ctx.send(await TENOR.arandom(random.choice(['bunny', "rabbit"])))
 
 
 
-
-@CLIENT.command(name='soapy')
+@CLIENT.command(name='soapy',
+                aliases=["raccoon"])
 async def soapy(ctx):
-    '''Posts a raccoon. for Soapy <3~'''
+    '''Posts raccoons for Soapy~.'''
+    await ctx.send(await TENOR.arandom('raccoon'))
     
-    _, _, file_names = os.walk("media/raccoons").__next__()
-    fl = discord.File("media/raccoons/{}".format(random.choice(file_names)))
-    await ctx.send(file=fl)
+    
+    
+@CLIENT.command(name='kira',
+                aliases=["catgirl"])
+async def kira(ctx):
+    '''Posts a catgirl for catgirl kira~.'''
+    await ctx.send(await TENOR.arandom('catgirl'))
     
     
     
