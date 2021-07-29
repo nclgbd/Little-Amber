@@ -28,6 +28,7 @@ jobs:
     - name: Copying SSH key...
       run: |
         pwd
+        ls -a
         cat {{ secrets.EC2TUTKEY }} > $(pwd)/Little-Amber/config/.ssh/ec2tutkey.pem
         chmod 400 $(pwd)/Little-Amber/config/.ssh/ec2tutkey.pem
     - name: Attempting to deploy Little Amber...
