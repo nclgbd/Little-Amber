@@ -7,6 +7,8 @@ import json
 import re
 import os
 import random
+import asyncio
+import TenGiphPy
 
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -60,6 +62,8 @@ TOKEN = bot_info["token"]
 CLIENT = commands.Bot(command_prefix = PREFIX)
 CLIENT_ID = bot_info["client_id"]
 ME = bot_info["me"]
+TENOR_API_TOKEN = bot_info["tenor_api_token"]
+TENOR = TenGiphPy.Tenor(token=TENOR_API_TOKEN)
 ALARM_TIME = '23:29'#24hrs
 
 START_TIME = datetime.utcnow()
@@ -365,10 +369,7 @@ async def typing(ctx):
 @CLIENT.command(name='dimden')
 async def dimden(ctx):
     '''Posts dimden.'''
-    
-    _, _, file_names = os.walk("media/dimden").__next__()
-    fl = discord.File("media/dimden/{}".format(random.choice(file_names)))
-    await ctx.send(file=fl)
+    await ctx.send(await TENOR.arandom('dimden'))
     
     
     
