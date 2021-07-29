@@ -15,30 +15,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: configuring environment
     - uses: webfactory/ssh-agent@v0.5.3
       with:
-          ssh-private-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          ssh-private-key: ${{ secrets.EC2TUTKEY }}
     - uses: actions/checkout@v2
     - name: setting up python 3.6
       uses: actions/setup-python@v2
       with:
         python-version: 3.6
-    - name: copying ssh key
-      run: |
-        ssh_dir=~/.ssh
-        mkdir -p ${ssh_dir}
-        aws_key=${ssh_dir}/ec2tutkey.pem
-        touch ${aws_key}
-        echo '${{ secrets.EC2TUTKEY }}' > ${aws_key}   
-        
-        sudo chmod 600 ${aws_key}
     - name: pull application and deploy
       run: |
-        ssh_dir=~/.ssh
-        aws_key=${ssh_dir}/ec2tutkey.pem
-        ls -la ${ssh_dir}
-        # cat ${ssh_dir}/known_hosts
-
         git config pull.ff only
         git pull
 
