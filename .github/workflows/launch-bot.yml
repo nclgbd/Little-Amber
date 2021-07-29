@@ -33,4 +33,4 @@ jobs:
         chmod 400 config/.ssh/ec2tutkey.pem
     - name: Attempting to deploy Little Amber...
       run: |
-        ssh -i "config/.ssh/ec2tutkey.pem" ${{ secrets.ADDRESS }} "cd Little-Amber/ && forever stopall && git commit -am \"Syncing Library\" && git pull origin master && forever start -c python3 scripts/main.py"
+        ssh -i "config/.ssh/ec2tutkey.pem" ${{ secrets.ADDRESS }} "bash ./launch.sh"
