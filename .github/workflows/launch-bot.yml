@@ -11,7 +11,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  configure-env:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,6 +27,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
     - name: copying ssh key
+      id: copy-ssh-key
       run: |
         mkdir -p config/.ssh/
         touch config/.ssh/ec2tutkey.pem
@@ -38,13 +39,15 @@ jobs:
       env:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         PULL_REQUEST: "${{ secrets.GITHUB_REF }}"
+  deploy-application:
     - name: pull and deploy
+      needs: ["configure-env"]
       run: |
         ssh -i "./config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         ls -a
         cd Little-Amber/ || return\n
         forever stopall\n
-        git commit -am "Syncing Library"\n
+        git commit -am "${{ secrets.GITHUB_REF }}"\n
         passphrase = ${{ secrets.SSH_PASSPHRASE }}
         git pull origin master < cat ${passphrase}\n
         forever start -c python3 scripts/main.py\n
