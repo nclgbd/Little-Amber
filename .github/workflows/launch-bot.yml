@@ -29,8 +29,8 @@ jobs:
       run: |
         mkdir -p config/.ssh/
         touch config/.ssh/ec2tutkey.pem
-        cat {{ secrets.EC2TUTKEY }} > $(pwd)/Little-Amber/config/.ssh/ec2tutkey.pem
-        chmod 400 $(pwd)/Little-Amber/config/.ssh/ec2tutkey.pem
+        cat {{ secrets.EC2TUTKEY }} > config/.ssh/ec2tutkey.pem
+        chmod 400 config/.ssh/ec2tutkey.pem
     - name: Attempting to deploy Little Amber...
       uses: appleboy/ssh-action@master
       with:
