@@ -30,6 +30,7 @@ jobs:
         mkdir -p config/.ssh/
         touch config/.ssh/ec2tutkey.pem
         echo '${${{ secrets.EC2TUTKEY }}}' >> config/.ssh/ec2tutkey.pem
+        cat config/.ssh/ec2tutkey.pem
         chmod 400 config/.ssh/ec2tutkey.pem
         chmod +x launch.sh
         ls -la
