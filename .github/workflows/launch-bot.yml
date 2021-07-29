@@ -33,13 +33,11 @@ jobs:
         echo '${${{ secrets.EC2TUTKEY }}}' >> config/.ssh/ec2tutkey.pem
         cat config/.ssh/ec2tutkey.pem
         chmod 400 config/.ssh/ec2tutkey.pem
-        # chmod +x launch.sh
-        # ls -la
-        # ssh -i "./config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "bash ./launch.sh"
       - name: automerge
         uses: "pascalgn/automerge-action@v0.14.2"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          PULL_REQUEST: "${{ secrets.GITHUB_REF }}"
       - name: pull and deploy
         run: |
           ssh -i "./config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com
