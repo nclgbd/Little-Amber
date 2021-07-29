@@ -40,6 +40,9 @@ jobs:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         PULL_REQUEST: "${{ secrets.GITHUB_REF }}"
   deploy-application:
+    runs-on: ubuntu-latest
+
+    steps:
     - name: pull and deploy
       needs: ["configure-env"]
       run: |
