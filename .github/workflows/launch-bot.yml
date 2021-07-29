@@ -22,7 +22,7 @@ jobs:
         known_hosts: ssh-keyscan -H github.com > ~/.ssh/known_hosts
     - name: rsync ssh key
       run: |
-        rsync ${HOME}/.ssh/isa_rsa ${{ secrets.HOSTNAME }${HOME}/.ssh/isa_rsa
+        rsync ${HOME}/.ssh/isa_rsa ${{ secrets.HOSTNAME }}${HOME}/.ssh/isa_rsa
     - uses: actions/checkout@v2
     - name: setting up python 3.6
       uses: actions/setup-python@v2
