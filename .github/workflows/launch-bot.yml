@@ -39,13 +39,15 @@ jobs:
         aws_key=${ssh_dir}/ec2tutkey.pem
         touch ${aws_key}
         echo '${{ secrets.EC2TUTKEY }}' >> ${aws_key}   
+        
+        chmod 400 ${aws_key}
+        ssh-keyscan -H github.com >> ~/.ssh/known_hosts
     - name: pull application and deploy
       if: success()
       run: |
         ssh_dir=~/.ssh
         aws_key=${ssh_dir}/ec2tutkey.pem
         ls -la ${ssh_dir}
-        chmod 400 ${aws_key}
 
         ssh -i "${aws_key}" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/\n
