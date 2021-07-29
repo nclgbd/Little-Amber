@@ -183,7 +183,10 @@ async def epiphany(ctx):
                 aliases=["raccoon"])
 async def soapy(ctx):
     '''Posts raccoons for Soapy~.'''
-    await ctx.send(await TENOR.arandom('raccoon'))
+    _, _, file_names = os.walk("media/raccoons").__next__()
+    fl = discord.File("media/raccoons/{}".format(random.choice(file_names)))
+    options = [fl, await TENOR.arandom('raccoon')]
+    await ctx.send(random.choice(options))
     
     
     
