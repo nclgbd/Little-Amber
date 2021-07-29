@@ -15,9 +15,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: webfactory/ssh-agent@v0.5.3
+    - name: install SSH key
+      uses: shimataro/ssh-key-action@v2
       with:
-          ssh-private-key: ${{ secrets.EC2TUTKEY }}
+        key: ${{ secrets.EC2TUTKEY }}
+        name: id_rsa # optional
+        known_hosts: ssh-keyscan -H github.com > ~/.ssh/known_hosts
+        config: ${{ secrets.CONFIG }} # ssh_config; optional
+        if_key_exists: ignore # replace / ignore / fail; optional (defaults to fail)
+    - name: rsync over ssh
+      run: rsync ./foo/ user@remote:bar/
     - uses: actions/checkout@v2
     - name: setting up python 3.6
       uses: actions/setup-python@v2
