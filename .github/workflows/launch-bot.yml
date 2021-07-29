@@ -32,11 +32,5 @@ jobs:
         echo "${${{ secrets.EC2TUTKEY }}}" > config/.ssh/ec2tutkey.pem
         chmod 400 config/.ssh/ec2tutkey.pem
     - name: Attempting to deploy Little Amber...
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ec2-user
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        key_path: config/.ssh/ec2tutkey.pem
-        script: bash ./deploy_amber.sh
+      run: |
+        ssh -i "config/.ssh/ec2tutkey.pem" ${{ secrets.ADDRESS }} "cd Little-Amber/ && forever stopall && git commit -am \"Syncing Library\" && git pull origin master && forever start -c python3 scripts/main.py"
