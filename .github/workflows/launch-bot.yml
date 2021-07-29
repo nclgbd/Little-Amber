@@ -25,7 +25,7 @@ jobs:
         python-version: 3.6
     - name: copying ssh key
       run: |
-        ssh_dir=~/.ssh
+        ssh_dir=config/.ssh
         mkdir -p ${ssh_dir}
         aws_key=${ssh_dir}/ec2tutkey.pem
         touch ${aws_key}
