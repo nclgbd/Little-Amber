@@ -172,10 +172,10 @@ async def wacky_debators(ctx):
 #     await ctx.send(epi_url)
 
 @CLIENT.command(name='epiphany',
-                aliases=["bunny", "epi", "rabbit", "bun"])
+                aliases=["bunny", "epi", "bun"])
 async def epiphany(ctx):
     '''For the bunny guy~.'''
-    await ctx.send(await TENOR.arandom(random.choice(['bunny', "rabbit"])))
+    await ctx.send(await TENOR.arandom('bunny'))
 
 
 
