@@ -46,6 +46,7 @@ jobs:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         PULL_REQUEST: "${{ secrets.GITHUB_REF }}"
     - name: pull and deploy
+      if: success()
       run: |
         ssh_dir=~/.ssh
         aws_key=${ssh_dir}/ec2tutkey.pem
