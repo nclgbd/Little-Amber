@@ -43,7 +43,7 @@ jobs:
       run: |
         pwd
         ls -la /home/runner/.ssh
-        ssh -i "~/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
+        ssh -i "~/.ssh/id_rsa" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/\n
         forever stopall\n
         git commit -am "${{ secrets.GITHUB_REF }}"\n
