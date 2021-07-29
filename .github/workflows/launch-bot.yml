@@ -1,19 +1,18 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Deploying Amber
+name: Deploy Amber
 
 on:
   push:
-    branches: [ setup-config ]
+    branches: [ master, setup-config ]
   pull_request:
     types: [ closed ]
     branches: [ master ]
 
 jobs:
-  launch-application:
+  deploy-amber:
     runs-on: ubuntu-latest
-
     steps:
     - name: install ssh key
       uses: shimataro/ssh-key-action@v2
@@ -21,9 +20,9 @@ jobs:
         key: ${{ secrets.ID_RSA }}
         name: isa_rsa # optional
         known_hosts: ssh-keyscan -H github.com > ~/.ssh/known_hosts
-    - name: rsync over ssh key
+    - name: rsync ssh key
       run: |
-        rsync /home/runner/.ssh/isa_rsa ${{ secrets.HOSTNAME }/home/runner/.ssh/isa_rsa
+        rsync ${HOME}/.ssh/isa_rsa ${{ secrets.HOSTNAME }${HOME}/.ssh/isa_rsa
     - uses: actions/checkout@v2
     - name: setting up python 3.6
       uses: actions/setup-python@v2
@@ -42,7 +41,7 @@ jobs:
         git pull
 
         ls -la ${ssh_dir}
-    - name: pull application and deploy
+    - name: launch application
       run: |
         pwd
         echo ${ssh_dir}
