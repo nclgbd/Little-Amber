@@ -33,11 +33,12 @@ jobs:
     - name: copying ssh key
       id: copy-ssh-key
       run: |
-        mkdir -p config/.ssh/
-        touch config/.ssh/ec2tutkey.pem
-        echo '${${{ secrets.EC2TUTKEY }}}' >> config/.ssh/ec2tutkey.pem
+        ssh_dir=~/.ssh
+        mkdir -p ${ssh_dir}
+        touch ${ssh_dir}/ec2tutkey.pem
+        echo '${${{ secrets.EC2TUTKEY }}}' >> ${ssh_dir}/ec2tutkey.pem
         cat config/.ssh/ec2tutkey.pem
-        chmod 400 config/.ssh/ec2tutkey.pem
+        chmod 400 ${ssh_dir}/ec2tutkey.pem
     - name: automerge
       uses: "pascalgn/automerge-action@v0.14.2"
       env:
