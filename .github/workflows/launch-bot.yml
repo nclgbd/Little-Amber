@@ -42,7 +42,7 @@ jobs:
     - name: pull application and deploy
       run: |
         pwd
-        ls -la config/.ssh/
+        ls -la /home/runner/
         sudo cat ~/.ssh/known_hosts
         ssh -i "~/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/\n
