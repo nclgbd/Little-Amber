@@ -30,7 +30,7 @@ jobs:
         mkdir -p config/.ssh/
         touch config/.ssh/ec2tutkey.pem
         str=${{ secrets.EC2TUTKEY }}
-        cat "${str}" > config/.ssh/ec2tutkey.pem
+        cat '${str}' > config/.ssh/ec2tutkey.pem
         chmod 400 config/.ssh/ec2tutkey.pem
     - name: Attempting to deploy Little Amber...
       uses: appleboy/ssh-action@master
