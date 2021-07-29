@@ -15,35 +15,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: install SSH key
+    - name: install ssh key
       uses: shimataro/ssh-key-action@v2
       with:
-        key: ${{ secrets.EC2TUTKEY }}
-        name: id_rsa # optional
+        key: ${{ secrets.ID_RSA }}
+        name: isa_rsa # optional
         known_hosts: ssh-keyscan -H github.com > ~/.ssh/known_hosts
+    - name: rsync over ssh key
+      run: rsync ~/.ssh/isa_rsa ${{ secrets.HOSTNAME }}~/.ssh/isa_rsa
     - uses: actions/checkout@v2
     - name: setting up python 3.6
       uses: actions/setup-python@v2
       with:
         python-version: 3.6
     - name: copying ssh key
+      with:
+        ssh_dir: config/.ssh
+        ec2tutkey: config/.ssh/ec2tutkey.pem
       run: |
-        ssh_dir=config/.ssh
-        mkdir -p ${ssh_dir}
-        aws_key=config/.ssh/ec2tutkey.pem
-        touch ${aws_key}
-        echo '${{ secrets.EC2TUTKEY }}' > ${aws_key}   
+        mkdir -p ssh_dir
+        touch ec2tutkey
+        echo '${{ secrets.EC2TUTKEY }}' > ec2tutkey  
         
-        sudo chmod 644 ${aws_key}
+        sudo chmod 644 ec2tutkey
         git config pull.ff only
         git pull
 
-        ls -la ${ssh_dir}
+        ls -la ssh_dir
     - name: pull application and deploy
+      with:
+        ssh_dir: config/.ssh
+        ec2tutkey: config/.ssh/ec2tutkey.pem
       run: |
         pwd
-        ls -la /home/runner/.ssh
-        sudo ssh -i "/home/runner/.ssh/id_rsa" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
+        ssh_dir
+        sudo ssh -i "ec2tutkey" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/\n
         forever stopall\n
         git commit -am "${{ secrets.GITHUB_REF }}"\n
