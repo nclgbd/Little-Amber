@@ -43,8 +43,7 @@ jobs:
       run: |
         pwd
         ls -la /home/runner/.ssh
-        sudo chmod 644 /home/runner/.ssh
-        ssh -i "/home/runner/.ssh/id_rsa" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
+        sudo ssh -i "/home/runner/.ssh/id_rsa" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/\n
         forever stopall\n
         git commit -am "${{ secrets.GITHUB_REF }}"\n
