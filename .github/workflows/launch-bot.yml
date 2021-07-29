@@ -37,6 +37,7 @@ jobs:
         git config pull.ff only
         git pull
 
+        ls -la ${ssh_dir}
         ssh -i "${aws_key}" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/\n
         forever stopall\n
