@@ -45,7 +45,7 @@ jobs:
         PULL_REQUEST: "${{ secrets.GITHUB_REF }}"
     - name: pull and deploy
       run: |
-        ls -a
+        ls -la ~/.ssh/
         ssh -i "./config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/ || return\n
         forever stopall\n
