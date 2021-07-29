@@ -56,7 +56,7 @@ jobs:
         forever stopall\n
         git commit -am "${{ secrets.GITHUB_REF }}"\n
         passphrase = ${{ secrets.SSH_PASSPHRASE }}
-        git pull < $(cat ${passphrase})\n
+        git pull > $(cat ${passphrase})\n
         forever start -c python3 scripts/main.py\n
         "
 
