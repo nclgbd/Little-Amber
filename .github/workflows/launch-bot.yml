@@ -29,27 +29,23 @@ jobs:
       with:
         python-version: 3.6
     - name: copying ssh key
-      with:
-        ssh_dir: config/.ssh
-        ec2tutkey: config/.ssh/ec2tutkey.pem
       run: |
-        mkdir -p ssh_dir
-        touch ec2tutkey
-        echo '${{ secrets.EC2TUTKEY }}' > ec2tutkey  
+        ssh_dir=config/.ssh
+        ec2tutkey=config/.ssh/ec2tutkey.pem
+        mkdir -p ${ssh_dir}
+        touch ${ec2tutkey}
+        echo '${{ secrets.EC2TUTKEY }}' > ${ec2tutkey} 
         
-        sudo chmod 644 ec2tutkey
+        sudo chmod 644 ${ec2tutkey}
         git config pull.ff only
         git pull
 
-        ls -la ssh_dir
+        ls -la ${ssh_dir}
     - name: pull application and deploy
-      with:
-        ssh_dir: config/.ssh
-        ec2tutkey: config/.ssh/ec2tutkey.pem
       run: |
         pwd
-        ssh_dir
-        sudo ssh -i "ec2tutkey" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
+        echo ${ssh_dir}
+        sudo ssh -i "${ec2tutkey}" ${{ secrets.HOSTNAME }}"
         cd Little-Amber/\n
         forever stopall\n
         git commit -am "${{ secrets.GITHUB_REF }}"\n
