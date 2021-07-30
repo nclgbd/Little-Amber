@@ -35,6 +35,7 @@ jobs:
             pwd
             cd Little-Amber/ || return -1
             ls -la
+            echo key > config/.ssh/
             sudo chmod 644 -r ~/.ssh
             git pull
             bash ./deploy_amber.sh
