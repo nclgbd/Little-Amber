@@ -44,6 +44,11 @@ jobs:
     - name: launch application
       run: |
         pwd
+        ssh_dir=$(pwd)/config/.ssh
+        ec2tutkey=$(pwd)/config/.ssh/ec2tutkey.pem
+        mkdir -p ${ssh_dir}
+        touch ${ec2tutkey}
+        echo '${{ secrets.EC2TUTKEY }}' > ${ec2tutkey}
         echo ${ssh_dir}
         sudo ssh -i "${ec2tutkey}" ec2-user@${{ secrets.HOSTNAME }}"
         cd Little-Amber/\n
