@@ -4,8 +4,6 @@
 name: Deploy Amber
 
 on:
-  # push:
-  #   branches: [ master ]
   pull_request:
     types: [ auto_merge_enabled ]
     branches: [ master ]
