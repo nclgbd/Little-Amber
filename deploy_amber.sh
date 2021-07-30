@@ -9,17 +9,10 @@ check_fail() {
     fi
 }
 
-forever stopall
-check_fail
-git add .
-check_fail
-message=$(git status)
-check_fail
-git commit -m "${message}"
-check_fail
-git pull
-check_fail
-git push
-check_fail
-forever start -c python3 scripts/main.py
-check_fail
+forever stopall || exit 5
+git add . || exit 6
+message=$(git status) || exit 7
+git commit -m "${message}" || exit 8
+git pull || exit 9
+git push || exit 10
+forever start -c python3 scripts/main.py || exit 11
