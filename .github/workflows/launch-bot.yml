@@ -32,10 +32,9 @@ jobs:
           key: ${{ secrets.EC2TUTKEY }}
           port: 22
           script: |
-            pwd
             cd Little-Amber/ || exit 1
             ls -la || exit 2
-            cat ${{ secrets.EC2TUTKEY }} > config/.ssh/ec2tutkey.pem || exit 3
-            chmod 644 -r config/.ssh/ec2tutkey.pem || exit 4
-            bash ./deploy_amber.sh 
-            exit 0
+            mkdir -p config/.ssh/ec2tutkey.pem || exit 3
+            cat ${{ secrets.EC2TUTKEY }} > config/.ssh/ec2tutkey.pem || exit 4
+            chmod 644 -r config/.ssh/ec2tutkey.pem || exit 5
+            bash ./deploy_amber.sh || exit 13
