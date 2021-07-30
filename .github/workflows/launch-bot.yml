@@ -32,8 +32,8 @@ jobs:
           key: ${{ secrets.EC2TUTKEY }}
           port: 22
           script: |
-            cd Little-Amber/ || return
             pwd
+            cd Little-Amber/ || return -1
             ls -la
             sudo chmod 644 -r ~/.ssh
             git pull
