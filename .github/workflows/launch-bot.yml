@@ -28,7 +28,7 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.6
-    - name: copying ssh key
+    - name: create ec2 identity file and launch application
       run: |
         ssh_dir=$(pwd)/config/.ssh
         ec2tutkey=$(pwd)/config/.ssh/ec2tutkey.pem
@@ -41,8 +41,7 @@ jobs:
         git pull
 
         ls -la ${ssh_dir}
-    - name: launch application
-      run: |
+
         echo ${ssh_dir}
         echo ${ec2tutkey}
         ssh -i "${ec2tutkey}" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com
