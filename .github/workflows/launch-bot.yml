@@ -6,10 +6,9 @@ name: Deploy Amber
 on:
   push:
     branches: [ master ]
-  pull_request:
-    types: [ closed ]
-    branches: [ master ]
-
+  # pull_request:
+  #   types: [ closed ]
+  #   branches: [ master ]
 jobs:
   deploy-amber:
     runs-on: ubuntu-latest
