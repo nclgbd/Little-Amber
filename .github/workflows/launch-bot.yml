@@ -30,6 +30,7 @@ jobs:
         python-version: 3.6
     - name: create ec2 identity file and launch application
       run: |
+        ls -la
         ssh_dir=$(pwd)/config/.ssh
         ec2tutkey=$(pwd)/config/.ssh/ec2tutkey.pem
         mkdir -p ${ssh_dir}
