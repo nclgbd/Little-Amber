@@ -4,9 +4,9 @@
 name: Deploy Amber
 
 on:
-  pull_request:
-    types: [ auto_merge_enabled ]
-    branches: [ master ]
+pull_request:
+  types: [ auto_merge_enabled ]
+  branches: [ master ]
 jobs:
   deploy-amber:
     runs-on: ubuntu-latest
