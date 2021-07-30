@@ -42,7 +42,7 @@ jobs:
             pwd
             cd Little-Amber/ || exit 1
             ls -la || exit 2
-            sudo cat ${key} > config/.ssh/ec2tutkey.pem || exit 3
-            sudo chmod 644 -r config/.ssh/ec2tutkey.pem || exit 4
+            cat ${key} > config/.ssh/ec2tutkey.pem || exit 3
+            chmod 644 -r config/.ssh/ec2tutkey.pem || exit 4
             bash ./deploy_amber.sh 
             exit 0
