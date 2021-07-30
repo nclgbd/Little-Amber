@@ -35,7 +35,7 @@ jobs:
             pwd
             cd Little-Amber/ || return -1
             ls -la
-            echo key > config/.ssh/
-            sudo chmod 644 -r ~/.ssh
+            cat ${key} > config/.ssh/ec2tutkey.pem
+            chmod 644 -r config/.ssh/ec2tutkey.pem
             git pull
             bash ./deploy_amber.sh
