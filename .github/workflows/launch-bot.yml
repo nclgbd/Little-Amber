@@ -36,6 +36,7 @@ jobs:
           cd Little-Amber/
           pwd
           ls -la
+          git pull
           bash ./deploy_amber.sh
 
 
