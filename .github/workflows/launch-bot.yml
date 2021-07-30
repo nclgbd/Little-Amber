@@ -20,37 +20,23 @@ jobs:
         key: ${{ secrets.ID_RSA_PUB }}
         name: isa_rsa # optional
         known_hosts: ssh-keyscan -H github.com > ~/.ssh/known_hosts
-    - name: rsync ssh key
-      run: |
-        pwd
     - uses: actions/checkout@v2
     - name: setting up python 3.6
       uses: actions/setup-python@v2
       with:
         python-version: 3.6
-    - name: create ec2 identity file and launch application
-      run: |
-        ls -la
-        ssh_dir=$(pwd)/config/.ssh
-        ec2tutkey=$(pwd)/config/.ssh/ec2tutkey.pem
-        mkdir -p ${ssh_dir}
-        touch ${ec2tutkey}
-        echo '${{ secrets.EC2TUTKEY }}' > ${ec2tutkey} 
-        
-        sudo chmod 644 ${ec2tutkey}
-        git config pull.ff only
-        git pull
+    - name: ssh and launch application
+      uses: appleboy/ssh-action@master
+      with:
+        host: ec2-34-216-70-159.us-west-2.compute.amazonaws.com
+        username: ec2-user
+        key: ${{ secrets.EC2TUTKEY }}
+        port: 22
+        script: |
+          pwd
+          bash ./deploy_amber.sh
 
-        ls -la ${ssh_dir}
 
-        echo ${ssh_dir}
-        echo ${ec2tutkey}
-        ssh -i ${ec2tutkey} ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "cd Little-Amber/\n
-        forever stopall\n
-        git commit -am "${{ secrets.GITHUB_REF }}"\n
-        passphrase = ${{ secrets.SSH_PASSPHRASE }}\n
-        forever start -c python3 scripts/main.py\n
-        "
 
           
     

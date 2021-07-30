@@ -1,2 +1,6 @@
 #!/bin/sh
-ssh -i "config/.ssh/ec2tutkey.pem" ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "cd Little-Amber/ && forever stopall && git commit -am \"Syncing Library\" && git pull origin master && forever start -c python3 scripts/main.py"
+cd Little-Amber/ || return
+forever stopall
+message=$(git status)
+git commit -am "${message}"
+forever start -c python3 scripts/main.py
