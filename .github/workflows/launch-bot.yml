@@ -6,8 +6,8 @@ on:
   name: Deploy Amber
   pull_request:
     branches: [master]
-  # push:
-  #   branches: [setup-config]
+# push:
+#   branches: [setup-config]
 
 jobs:
   deploy-amber:
