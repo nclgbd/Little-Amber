@@ -45,7 +45,7 @@ jobs:
 
         echo ${ssh_dir}
         echo ${ec2tutkey}
-        ssh -t -i ${ec2tutkey} ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com
+        ssh -i ${ec2tutkey} ec2-user@ec2-34-216-70-159.us-west-2.compute.amazonaws.com "
         cd Little-Amber/\n
         forever stopall\n
         git commit -am "${{ secrets.GITHUB_REF }}"\n
