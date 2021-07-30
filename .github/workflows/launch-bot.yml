@@ -5,7 +5,7 @@ name: Deploy Amber
 
 on:
   push:
-    branches: [ master, setup-config ]
+    branches: [ master ]
   pull_request:
     types: [ closed ]
     branches: [ master ]
