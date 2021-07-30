@@ -23,7 +23,6 @@ jobs:
     - name: rsync ssh key
       run: |
         pwd
-        rsync .ssh/isa_rsa ${{ secrets.HOSTNAME }}.ssh/isa_rsa
     - uses: actions/checkout@v2
     - name: setting up python 3.6
       uses: actions/setup-python@v2
