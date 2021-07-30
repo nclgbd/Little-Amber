@@ -50,7 +50,7 @@ jobs:
         touch ${ec2tutkey}
         echo '${{ secrets.EC2TUTKEY }}' > ${ec2tutkey}
         echo ${ssh_dir}
-        ssh -i "${ec2tutkey}" ec2-user@${{ secrets.HOSTNAME }}"
+        ssh -i "${ec2tutkey}" ec2-user@${{ secrets.HOSTNAME }}
         cd Little-Amber/\n
         forever stopall\n
         git commit -am "${{ secrets.GITHUB_REF }}"\n
