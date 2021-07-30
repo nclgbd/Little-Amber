@@ -159,16 +159,8 @@ async def wacky_debators(ctx):
     """Wacky Debators HATE her!!! Debatebros in DGG want from 3 to 27 WINS with this ONE WEIRD EMOTE. >>>CLICK HERE<<< TO LEARN MORE"""
     wacky_url = "https://cdn.discordapp.com/attachments/826739157309063179/833257773500203028/wacky-debaters-HATE-her-gif-2.gif"
     await ctx.send(wacky_url)
-    
 
 
-# @CLIENT.command(name='epiphany',
-#                 aliases=['epi'])
-# async def epiphany(ctx):
-#     """amber suck my dick fuck you oh my god i fucking hate you why did we replace bullet with someone even more arrogant and 
-#     bratty and how the fuck is it even possible that such a person can exist jesus fucking christ"""
-#     epi_url = "https://media.discordapp.net/attachments/826739157309063179/832372910391820299/unknown.png?width=1440&height=169"
-#     await ctx.send(epi_url)
 
 @CLIENT.command(name='epiphany',
                 aliases=["bunny", "epi", "bun"])
@@ -397,7 +389,7 @@ async def dimden(ctx):
 async def bookclub(ctx):
     """Book Club is held every Sunday at 1:00PM PST. We typically read books and short stories about history, politics, philosophy, etc. Our reading pace is about 30-50 pages a week, depending on the material. You can sign up for all BC notifications with the "Book Club" role. You can also choose the "Book Club (Waiting)" sign up for notifications only when we are starting a new book or short story. Even if you aren't reading the material, please still feel free to join the Sunday VC sessions just to listen in!"""
     
-    string = """Book Club is held ***every Sunday at 1:00PM PST***. We typically read books and short stories about history, politics, philosophy, etc. Our reading pace is about 30-50 pages a week, depending on the material. You can sign up for all BC notifications with the "Book Club" role. You can also choose the "Book Club (Waiting)" sign up for notifications only when we are starting a new book or short story. Even if you aren't reading the material, please still feel free to join the Sunday VC sessions just to listen in! For more details about the available commands, use `!help` bookclub"""
+    string = """Book Club is held **every Sunday at 1:00PM PST**. We typically read books and short stories about history, politics, philosophy, etc. Our reading pace is about 30-50 pages a week, depending on the material. You can sign up for all BC notifications with the "Book Club" role. You can also choose the "Book Club (Waiting)" sign up for notifications only when we are starting a new book or short story. Even if you aren't reading the material, please still feel free to join the Sunday VC sessions just to listen in! For more details about the available commands, use `!help bookclub`"""
     await ctx.send(string)
     
 
