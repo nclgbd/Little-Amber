@@ -33,9 +33,9 @@ jobs:
           port: 22
           script: |
             pwd
-            cd Little-Amber/ || return -1
-            ls -la
-            cat ${key} > config/.ssh/ec2tutkey.pem
-            chmod 644 -r config/.ssh/ec2tutkey.pem
-            git pull
-            bash ./deploy_amber.sh
+            cd Little-Amber/ || return 1
+            ls -la || return 2
+            cat ${key} > config/.ssh/ec2tutkey.pem || return 3
+            chmod 644 -r config/.ssh/ec2tutkey.pem || return 4
+            bash ./deploy_amber.sh || return 12
+            return 0
