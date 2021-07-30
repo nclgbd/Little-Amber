@@ -1,8 +1,25 @@
 #!/bin/sh
-forever stopall || return 5
-git add . || return 6
-message=$(git status) || return 7
-git commit -m "${message}" || return 8
+
+check_fail() {
+    if [ ${?} -eq 0 ]; then
+        echo 0
+    else
+        echo 1
+        return
+    fi
+}
+
+forever stopall
+check_fail
+git add .
+check_fail
+message=$(git status)
+check_fail
+git commit -m "${message}"
+check_fail
 git pull
+check_fail
 git push
-forever start -c python3 scripts/main.py || return 11
+check_fail
+forever start -c python3 scripts/main.py
+check_fail
