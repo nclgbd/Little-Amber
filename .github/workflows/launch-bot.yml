@@ -32,17 +32,10 @@ jobs:
           key: ${{ secrets.EC2TUTKEY }}
           port: 22
           script: |
-            check_fail() {
-                if [ ${?} -eq 0 ]; then
-                    exit 0
-                else
-                    exit -1
-                fi
-            }
             pwd
             cd Little-Amber/ || exit 1
             ls -la || exit 2
-            cat ${key} > config/.ssh/ec2tutkey.pem || exit 3
+            cat ${{ secrets.EC2TUTKEY }} > config/.ssh/ec2tutkey.pem || exit 3
             chmod 644 -r config/.ssh/ec2tutkey.pem || exit 4
             bash ./deploy_amber.sh 
             exit 0

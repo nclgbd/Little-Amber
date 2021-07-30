@@ -1,14 +1,4 @@
 #!/bin/sh
-
-check_fail() {
-    if [ ${?} -eq 0 ]; then
-        echo 0
-    else
-        echo 1
-        return
-    fi
-}
-
 forever stopall || exit 5
 git add . || exit 6
 message=$(git status) || exit 7
