@@ -45,7 +45,7 @@ jobs:
       run: |
         pwd
         echo ${ssh_dir}
-        sudo ssh -i "${ec2tutkey}" ${{ secrets.HOSTNAME }}"
+        sudo ssh -i "${ec2tutkey}" ec2-user@${{ secrets.HOSTNAME }}"
         cd Little-Amber/\n
         forever stopall\n
         git commit -am "${{ secrets.GITHUB_REF }}"\n
