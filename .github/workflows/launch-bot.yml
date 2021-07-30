@@ -33,8 +33,9 @@ jobs:
         key: ${{ secrets.EC2TUTKEY }}
         port: 22
         script: |
-          pwd
           cd Little-Amber/
+          pwd
+          ls -la
           bash ./deploy_amber.sh
 
 
