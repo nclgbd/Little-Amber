@@ -34,7 +34,6 @@ jobs:
           script: |
             cd Little-Amber/ || exit 1
             ls -la || exit 2
-            mkdir -p config/.ssh/ec2tutkey.pem || exit 3
-            cat ${{ secrets.EC2TUTKEY }} > config/.ssh/ec2tutkey.pem || exit 4
-            chmod 644 -r config/.ssh/ec2tutkey.pem || exit 5
-            bash ./deploy_amber.sh || exit 13
+            cat ${{ secrets.EC2TUTKEY }} > config/.ssh/ec2tutkey.pem || exit 3
+            chmod 644 -r config/.ssh/ec2tutkey.pem || exit 4
+            bash ./deploy_amber.sh || exit 12
