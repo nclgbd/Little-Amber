@@ -34,6 +34,7 @@ jobs:
         port: 22
         script: |
           pwd
+          cd Little-Amber/
           bash ./deploy_amber.sh
 
 
