@@ -192,6 +192,14 @@ async def kira(ctx):
     
     
     
+@CLIENT.command(name='whistle',
+                description=".... I didn't do a damn thing~")
+async def whistle(ctx):
+    url = "https://github.com/nclgbd/Little-Amber/blob/master/media/AmberWhistle.gif?raw=true"
+    await ctx.send(url)
+    
+    
+    
 @CLIENT.command(name='readme',
                 description="Gives the link to the README.md")
 async def read_me(ctx):
