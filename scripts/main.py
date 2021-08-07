@@ -63,7 +63,9 @@ CLIENT = commands.Bot(command_prefix = PREFIX)
 CLIENT_ID = bot_info["client_id"]
 ME = bot_info["me"]
 TENOR_API_TOKEN = bot_info["tenor_api_token"]
+GIPHY_API_TOKEN = bot_info["giphy_api_token"]
 TENOR = TenGiphPy.Tenor(token=TENOR_API_TOKEN)
+GIPHY = TenGiphPy.Giphy(token=GIPHY_API_TOKEN)
 ALARM_TIME = '23:29'#24hrs
 
 START_TIME = datetime.utcnow()
@@ -166,7 +168,8 @@ async def wacky_debators(ctx):
                 aliases=["bunny", "epi", "bun"])
 async def epiphany(ctx):
     '''For the bunny guy~.'''
-    await ctx.send(await TENOR.arandom('bunny'))
+    tenor = await TENOR.arandom(tag='bunny')
+    await ctx.send(tenor)
 
 
 
@@ -176,7 +179,11 @@ async def soapy(ctx):
     '''Posts raccoons for Soapy~.'''
     _, _, file_names = os.walk("media/raccoons").__next__()
     fl = discord.File("media/raccoons/{}".format(random.choice(file_names)))
-    file_option = random.choice([fl, await TENOR.arandom('raccoon')])
+    tenor = await TENOR.arandom('raccoon')
+    giphy = await (GIPHY.arandom(tag="raccoon"))#['data']['images']['downsized_large']['url']
+    giphy = giphy['data']['images']['downsized_large']['url']
+    gif = random.choice([giphy, tenor])
+    file_option = random.choice([fl, tenor, giphy])
     if type(file_option) == discord.file.File:
         await ctx.send(file=file_option)
     else:
