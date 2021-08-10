@@ -388,6 +388,12 @@ async def dimden(ctx):
     await ctx.send(await TENOR.arandom('dimden'))
     
     
+@CLIENT.command(name='rules')
+async def rules(ctx):
+    '''Posts the rules of the server. Just kidding.... go to #rules if you want the rules.'''
+    url = "https://github.com/nclgbd/Little-Amber/blob/master/media/rules/{}.gif?raw=true".format(random.choice([1, 2, 3, 4, 5, 6, 7, 8, 10]))
+    await ctx.send(url)
+    
     
 
 ### B O O K    C L U B     C O M M A N D S ###
