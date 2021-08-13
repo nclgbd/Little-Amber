@@ -199,6 +199,14 @@ async def kira(ctx):
     
     
     
+@CLIENT.command(name='whistle',
+                description=".... I didn't do a damn thing~")
+async def whistle(ctx):
+    url = "https://github.com/nclgbd/Little-Amber/blob/master/media/AmberWhistle.gif?raw=true"
+    await ctx.send(url)
+    
+    
+    
 @CLIENT.command(name='readme',
                 description="Gives the link to the README.md")
 async def read_me(ctx):
@@ -386,6 +394,12 @@ async def dimden(ctx):
     '''Posts dimden.'''
     await ctx.send(await TENOR.arandom('dimden'))
     
+    
+@CLIENT.command(name='rules')
+async def rules(ctx):
+    '''Posts the rules of the server. Just kidding.... go to #rules if you want the rules.'''
+    url = "https://github.com/nclgbd/Little-Amber/blob/master/media/rules/{}.gif?raw=true".format(random.choice([1, 2, 3, 4, 5, 6, 7, 8, 10]))
+    await ctx.send(url)
     
     
 
