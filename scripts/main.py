@@ -170,6 +170,15 @@ async def epiphany(ctx):
     '''For the bunny guy~.'''
     tenor = await TENOR.arandom(tag='bunny')
     await ctx.send(tenor)
+    
+    
+
+@CLIENT.command(name='neari')
+async def neari(ctx):
+    '''No flirting, it's banned!'''
+    string = "Hey all, just an FYI because I feel like I’m losing my mind.\n\
+None of my interactions in here with anyone, SHOULD EVER BE CONSIDERED AS FLIRTING. It is nothing more than me being your friend. I do not find any of you attractive, or want anything more than friendship. Is this weird to say, yes? But it shouldn’t be a problem to any of you."
+    await ctx.send(string)
 
 
 
@@ -311,7 +320,7 @@ async def uptime(ctx):
 @CLIENT.command(name='hugh')
 async def hugh(ctx):
     """HWNBABM"""
-    url = "https://media.discordapp.net/attachments/838595679994511400/859620398864924672/unknown.png"
+    url = "https://images-ext-1.discordapp.net/external/SzMDH8nwVukWzN-UmQjiKKi2l_sSmGaiPMgnBC-KHLc/%3Fwidth%3D1246%26height%3D701/https/media.discordapp.net/attachments/826739157309063179/875121225263902760/HUGHbf.png"
     await ctx.send(url)
 
 
