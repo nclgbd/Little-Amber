@@ -63,7 +63,9 @@ CLIENT = commands.Bot(command_prefix = PREFIX)
 CLIENT_ID = bot_info["client_id"]
 ME = bot_info["me"]
 TENOR_API_TOKEN = bot_info["tenor_api_token"]
+GIPHY_API_TOKEN = bot_info["giphy_api_token"]
 TENOR = TenGiphPy.Tenor(token=TENOR_API_TOKEN)
+GIPHY = TenGiphPy.Giphy(token=GIPHY_API_TOKEN)
 ALARM_TIME = '23:29'#24hrs
 
 START_TIME = datetime.utcnow()
@@ -166,7 +168,17 @@ async def wacky_debators(ctx):
                 aliases=["bunny", "epi", "bun"])
 async def epiphany(ctx):
     '''For the bunny guy~.'''
-    await ctx.send(await TENOR.arandom('bunny'))
+    tenor = await TENOR.arandom(tag='bunny')
+    await ctx.send(tenor)
+    
+    
+
+@CLIENT.command(name='neari')
+async def neari(ctx):
+    '''No flirting, it's banned!'''
+    string = "Hey all, just an FYI because I feel like I’m losing my mind.\n\
+None of my interactions in here with anyone, SHOULD EVER BE CONSIDERED AS FLIRTING. It is nothing more than me being your friend. I do not find any of you attractive, or want anything more than friendship. Is this weird to say, yes? But it shouldn’t be a problem to any of you."
+    await ctx.send(string)
 
 
 
@@ -176,7 +188,11 @@ async def soapy(ctx):
     '''Posts raccoons for Soapy~.'''
     _, _, file_names = os.walk("media/raccoons").__next__()
     fl = discord.File("media/raccoons/{}".format(random.choice(file_names)))
-    file_option = random.choice([fl, await TENOR.arandom('raccoon')])
+    tenor = await TENOR.arandom('raccoon')
+    giphy = await (GIPHY.arandom(tag="raccoon"))#['data']['images']['downsized_large']['url']
+    giphy = giphy['data']['images']['downsized_large']['url']
+    gif = random.choice([giphy, tenor])
+    file_option = random.choice([fl, tenor, giphy])
     if type(file_option) == discord.file.File:
         await ctx.send(file=file_option)
     else:
@@ -304,7 +320,7 @@ async def uptime(ctx):
 @CLIENT.command(name='hugh')
 async def hugh(ctx):
     """HWNBABM"""
-    url = "https://media.discordapp.net/attachments/838595679994511400/859620398864924672/unknown.png"
+    url = "https://images-ext-1.discordapp.net/external/SzMDH8nwVukWzN-UmQjiKKi2l_sSmGaiPMgnBC-KHLc/%3Fwidth%3D1246%26height%3D701/https/media.discordapp.net/attachments/826739157309063179/875121225263902760/HUGHbf.png"
     await ctx.send(url)
 
 
