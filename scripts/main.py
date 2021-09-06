@@ -52,10 +52,16 @@ CHANNEL_LINKS = [830772056702058547,
 
 CHANNEL_MAPPING = dict(zip(CHANNEL_LIBRARY, CHANNEL_LINKS))
 
+bunny_cache = []
+raccoon_cache = []
+catgirl_cache = []
+
+
 LINK_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
 
 with open("config/config.json", "r") as j:
     bot_info = json.load(j)
+       
     
 PREFIX = bot_info["prefix"]
 TOKEN = bot_info["token"]
@@ -67,9 +73,14 @@ GIPHY_API_TOKEN = bot_info["giphy_api_token"]
 TENOR = TenGiphPy.Tenor(token=TENOR_API_TOKEN)
 GIPHY = TenGiphPy.Giphy(token=GIPHY_API_TOKEN)
 ALARM_TIME = '23:29'#24hrs
-
 START_TIME = datetime.utcnow()
-print(START_TIME)
+
+    
+def caching(cache, new_link):
+    cache.append(new_link)
+    if len(cache) > 5:
+        del cache[0]
+     
 
 class BookClub:
     
@@ -172,7 +183,6 @@ async def epiphany(ctx):
     await ctx.send(tenor)
     
     
-
 @CLIENT.command(name='neari')
 async def neari(ctx):
     '''No flirting, it's banned!'''
@@ -181,6 +191,13 @@ None of my interactions in here with anyone, SHOULD EVER BE CONSIDERED AS FLIRTI
     await ctx.send(string)
 
 
+@CLIENT.command(name='iraen')
+async def iraen(ctx):
+    '''Only flirting, it's NOT banned!'''
+    string = "Hey all, just an FYI because I feel like I’m losing my mind.\n\
+All of my interactions in here with anyone, SHOULD ALWAYS BE CONSIDERED AS FLIRTING. It is a lot more than me being your friend. I do find all of you attractive, and want everything more than friendship. Is this weird to say, yes? But it shouldn’t be a problem to any of you."
+    await ctx.send(string)
+    
 
 @CLIENT.command(name='soapy',
                 aliases=["raccoon"])
@@ -189,15 +206,11 @@ async def soapy(ctx):
     _, _, file_names = os.walk("media/raccoons").__next__()
     fl = discord.File("media/raccoons/{}".format(random.choice(file_names)))
     tenor = await TENOR.arandom('raccoon')
-    giphy = await (GIPHY.arandom(tag="raccoon"))#['data']['images']['downsized_large']['url']
-    giphy = giphy['data']['images']['downsized_large']['url']
-    gif = random.choice([giphy, tenor])
-    file_option = random.choice([fl, tenor, giphy])
+    file_option = random.choice([fl, tenor])
     if type(file_option) == discord.file.File:
         await ctx.send(file=file_option)
     else:
         await ctx.send(file_option)
-    
     
     
 @CLIENT.command(name='kira',
@@ -205,7 +218,6 @@ async def soapy(ctx):
 async def kira(ctx):
     '''Posts a catgirl for catgirl kira~.'''
     await ctx.send(await TENOR.arandom('catgirl'))
-    
     
     
 @CLIENT.command(name='whistle',
