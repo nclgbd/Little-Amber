@@ -223,7 +223,7 @@ async def whistle(ctx):
     
 @CLIENT.command(name='yamero',
                 description="STOP IT NOW",
-                aliases=["stop"])
+                aliases=["stop", "talos", "skyrim"])
 async def yamero(ctx):
     url = "https://tenor.com/view/yamero-shake-cat-stop-gif-17276982"
     await ctx.send(url)
