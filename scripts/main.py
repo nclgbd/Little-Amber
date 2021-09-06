@@ -93,15 +93,13 @@ class BookClub:
             
         self.current_readings = self.get_current_readings()
         
-    
-    
+
     def update_library(self):
         
         with open(self.file_path, "w") as f:
             json.dump(self.books, f)
        
        
-
     def get_current_readings(self):
 
         current_readings = dict()
@@ -110,7 +108,6 @@ class BookClub:
                 current_readings[book] = self.books[book]["url"]
                 
         return current_readings  
-    
     
     
     def upload_book(self, attachment, is_current_reading=True):
@@ -123,17 +120,14 @@ class BookClub:
         self.update_library()
       
         
-        
     def set_current_reading(self, book_name, is_current_reading=True):
         self.books[book_name]["current_reading"] = is_current_reading
         self.update_library()
         
     
-    
     def remove_book(self, book_name):
         del self.books[book_name]
         self.update_library()
-
 
 book_club = BookClub("media/book_club/books.json")
 
