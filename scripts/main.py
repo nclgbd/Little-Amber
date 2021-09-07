@@ -19,6 +19,15 @@ from datetime import datetime, timedelta
 CHANNEL_NAMES = ["philosophy", "religion", "psychology", "sociology", "economics", "us-politics",
                  "global-politics", "history", "science", "lgbt", "rhetoric", "art-analysis", "miscellaneous", "bot-testing"]
 
+BANNED_LINKS = ("https://media.tenor.co/images/033e1de7e60230c5b0447e8dcbfa109c/tenor.gif",
+                "https://media.tenor.co/images/7da17fee025a662bcb7c673e4f6d0e30/tenor.gif",
+                "https://media.tenor.co/images/83a64d4f13a293d874f5328eb940ba34/tenor.gif",
+                "https://media.tenor.co/images/f17098a7efa9d8c1e6f33fdaf7f37b06/tenor.gif",
+                "https://media.tenor.co/images/8c5214d30329d77c9564ab31fd9d0579/tenor.gif",
+                "https://media.tenor.co/images/2941a64f54a6f7d94974988c4158495e/tenor.gif",
+                "https://media.tenor.co/images/f0492b5be0dd69319c1abcf3a7b93628/tenor.gif",
+                "https://media.tenor.co/images/905888dcc9e267ec85efd66f0cf7b63a/tenor.gif")
+
 CHANNEL_LIBRARY = [826749300993425419,
                    827467898804502538,
                    828164039874969610,
@@ -174,6 +183,8 @@ async def wacky_debators(ctx):
 async def epiphany(ctx):
     '''For the bunny guy~.'''
     tenor = await TENOR.arandom(tag='bunny')
+    while tenor in BANNED_LINKS:
+        tenor = await TENOR.arandom(tag='bunny')
     await ctx.send(tenor)
     
     
