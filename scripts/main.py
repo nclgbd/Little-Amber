@@ -117,7 +117,8 @@ def get_all_video_in_channel(channel_id):
         except:
             break
     return video_links
-     
+
+YT_LINKS = get_all_video_in_channel("UC09lQ3ZFVlIhqNzJHJxgIjA")  
 
 class BookClub:
     
@@ -198,9 +199,7 @@ async def on_message(message):
 @CLIENT.command(name='tudou')
 async def tudou(ctx):
     '''The REAL DIMDEN HAS ARRIVED'''
-    tudou_channel_id = "UC09lQ3ZFVlIhqNzJHJxgIjA"
-    yt_links = get_all_video_in_channel(tudou_channel_id)
-    link = random.choice(yt_links)
+    link = random.choice(YT_LINKS)
     await ctx.send(link)
     
 
