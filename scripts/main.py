@@ -9,6 +9,7 @@ import os
 import random
 import asyncio
 import TenGiphPy
+import urllib
 
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -79,6 +80,7 @@ CLIENT_ID = bot_info["client_id"]
 ME = bot_info["me"]
 TENOR_API_TOKEN = bot_info["tenor_api_token"]
 GIPHY_API_TOKEN = bot_info["giphy_api_token"]
+YT_API_TOKEN = bot_info["yt_api_token"]
 TENOR = TenGiphPy.Tenor(token=TENOR_API_TOKEN)
 GIPHY = TenGiphPy.Giphy(token=GIPHY_API_TOKEN)
 ALARM_TIME = '23:29'#24hrs
@@ -89,6 +91,32 @@ def caching(cache, new_link):
     cache.append(new_link)
     if len(cache) > 5:
         del cache[0]
+        
+
+def get_all_video_in_channel(channel_id):
+    api_key = YT_API_TOKEN
+
+    base_video_url = 'https://www.youtube.com/watch?v='
+    base_search_url = 'https://www.googleapis.com/youtube/v3/search?'
+
+    first_url = base_search_url+'key={}&channelId={}&part=snippet,id&order=date&maxResults=100'.format(api_key, channel_id)
+
+    video_links = []
+    url = first_url
+    while True:
+        inp = urllib.request.urlopen(url)
+        resp = json.load(inp)
+
+        for i in resp['items']:
+            if i['id']['kind'] == "youtube#video":
+                video_links.append(base_video_url + i['id']['videoId'])
+
+        try:
+            next_page_token = resp['nextPageToken']
+            url = first_url + '&pageToken={}'.format(next_page_token)
+        except:
+            break
+    return video_links
      
 
 class BookClub:
@@ -166,7 +194,15 @@ async def on_message(message):
     
     await CLIENT.process_commands(message)
 
-
+# UC09lQ3ZFVlIhqNzJHJxgIjA
+@CLIENT.command(name='tudou')
+async def tudou(ctx):
+    '''The REAL DIMDEN HAS ARRIVED'''
+    tudou_channel_id = "UC09lQ3ZFVlIhqNzJHJxgIjA"
+    yt_links = get_all_video_in_channel(tudou_channel_id)
+    link = random.choice(yt_links)
+    await ctx.send(link)
+    
 
 @CLIENT.command(name='wacky',
                 aliases=['wackydebators', 'wacky_debators'],
