@@ -409,7 +409,43 @@ async def jebaited(ctx):
     url = "https://media.discordapp.net/attachments/826739157309063179/859930982186352710/irk_jebaited.png?width=1440&height=156"
     await ctx.send(url)
     
-    
+
+
+@CLIENT.command(name='jeb')
+async def jebaited(ctx):
+    """Only the best jebs"""
+    jebs = [
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531762184761354/boatride.jpeg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531763367563294/bros.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531763052998666/art.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531766483943464/bush.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531766999834645/chad.jpeg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531766534250506/CFeB4S8WYAAxX9K.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531769071824956/comrade.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531769734524948/c_scalefl_progressiveq_80w_800.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531771638730792/cultured.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531772674732032/hmm.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531963003842601/hoops.jpeg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531979239993374/jebb.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911531998542168064/jebbbb.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532025176002580/job.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532037343686686/leggs.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532064183054336/owO.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532078208802816/poncho.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532089113972756/racist.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532098781872129/sad.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532110173593600/segway.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532123855421460/snow.jpeg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532146710179840/sweater.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532156700999710/tromp.webp",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532165802647552/waddup.jpg",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532179677384814/winning.png",
+        "https://cdn.discordapp.com/attachments/911531593766670376/911532190762946590/yum.jpg"
+    ]
+
+    await ctx.send(random.choice(jebs))   
+ 
+
     
 @CLIENT.command(name='nicole')
 async def nicole(ctx):

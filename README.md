@@ -17,6 +17,7 @@ This is Little Amber, a bot I created to help manage the links in Amber's server
 * `!nico` - https://youtu.be/-_lb--PWEMU?t=26
 * `!triange` - The infamous triangle, used to analyze trans issues, also funny meme.
 * `!jebaited` - Jebaited.... :^)
+* `!jeb - Awesome jebs.
 * `!nicole` - https://www.youtube.com/watch?v=87K5Uh3AML0, but with me instead :AmberHappy:
 * `!upload` - Uploads a book to our book club library database. This command is only usable by `Book Club` members.
 * `!reading` - Gives the current readings for book club.
